@@ -1,10 +1,12 @@
 import { View,Text,StyleSheet,TextInput,Button,FlatList,Pressable} from 'react-native';
 import NavigationButton from '../Components/NavigationButton';
 import { useState, useContext } from "react";
+
 import ItemContext from '../Contexts/ItemContext';
 
 const GameDetails = ({navigation}) => {
     const {state,create} = useContext(ItemContext);
+
     const [competitonName, setcompetitionName] = useState("");
     const [rinkNumber, setRinkNumber] = useState("");
     const [date, setDate] = useState("");
@@ -21,17 +23,10 @@ const GameDetails = ({navigation}) => {
             onChangeText={(text) => {setcompetitionName(text);}}
             multiline={false}
             numberOfLines={1}
-            maxLength={10}
+            maxLength={20}
             />
-        <Text style={styles.textLabel}>Date:</Text>
-            <TextInput style={styles.textInput} 
-            placeholder="Type date here."
-            value={date}
-            onChangeText={(text) => {setDate(text);}}
-            multiline={false}
-            numberOfLines={1}
-            maxLength={10}
-            />
+        
+        
         <Text style={styles.textLabel}>Rink Number:</Text>
             <TextInput style={styles.textInput} 
             placeholder="Type rink number here"
@@ -48,7 +43,7 @@ const GameDetails = ({navigation}) => {
             onChangeText={(text) => {setTeamNameA(text);}}
             multiline={false}
             numberOfLines={1}
-            maxLength={10}
+            maxLength={20}
             />
         <Text style={styles.textLabel}>Number of players in team A:</Text>
             <TextInput style={styles.textInput} 
@@ -57,7 +52,7 @@ const GameDetails = ({navigation}) => {
             onChangeText={(text) => {setNumberOfPlayersA(text);}}
             multiline={false}
             numberOfLines={1}
-            maxLength={10}
+            maxLength={1}
             />
         <Text style={styles.textLabel}>Team Name B:</Text>
             <TextInput style={styles.textInput} 
@@ -66,16 +61,16 @@ const GameDetails = ({navigation}) => {
             onChangeText={(text) => {setTeamNameB(text);}}
             multiline={false}
             numberOfLines={1}
-            maxLength={10}
+            maxLength={20}
             />    
-        <Text style={styles.textLabel}>Team Name B:</Text>
+        <Text style={styles.textLabel}>Number of players in team B:</Text>
             <TextInput style={styles.textInput} 
-            placeholder="Type team name B here"
+            placeholder="Type number here"
             value={NumberOfPlayersB}
             onChangeText={(text) => {setNumberOfPlayersB(text);}}
             multiline={false}
             numberOfLines={1}
-            maxLength={10}
+            maxLength={1}
             />     
       <Button title = "submit items" onPress ={() => {
                create(competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,NumberOfPlayersB, () => navigation.pop());
@@ -90,7 +85,7 @@ const GameDetails = ({navigation}) => {
                     <Pressable onPress={() => navigation.navigate('ViewGamesScreen',{
                         id: item.id,
                         competitonName: item.competitonName,
-                        date: item.date,
+                        date: item.date.toUTCString(),
                         rinkNumber: item.rinkNumber,
                         teamNameA: item.teamNameA,
                         NumberOfPlayersA: item.NumberOfPlayersA,

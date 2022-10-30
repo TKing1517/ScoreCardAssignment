@@ -12,7 +12,7 @@ const ViewGamesScreen = ({navigation, route}) => {
         <View>
             <Text>ID: {id} </Text>
             <Text>competitonName: {currentEntry.competitonName} </Text>
-            <Text>date: {currentEntry.date}</Text>
+            <Text>date: {new Date(date).toLocaleDateString()}</Text>
             <Text>rinkNumber: {currentEntry.rinkNumber} </Text>
             <Text>teamNameA: {currentEntry.teamNameA} </Text>
             <Text>NumberOfPlayersA: {currentEntry.NumberOfPlayersA}</Text>

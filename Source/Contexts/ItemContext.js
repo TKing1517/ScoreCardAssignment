@@ -3,7 +3,8 @@ import { actionTypes } from "../Helpers/actionTypes";
 
 const ItemContext = react.createContext();
 let gameDetails = []
-
+let PlayersA = []
+let PlayersB = []
 const reducer = (state,action) => {
     switch(action.type){
         case actionTypes.create:
@@ -12,12 +13,14 @@ const reducer = (state,action) => {
                 {
                     id: Math.floor(Math.random()*99999),
                     competitonName: action.payload.competitonName,
-                    date: action.payload.date,
+                    date: new Date(),
                     rinkNumber: action.payload.rinkNumber,
                     teamNameA: action.payload.teamNameA,
                     NumberOfPlayersA: action.payload.NumberOfPlayersA,
+
                     teamNameB: action.payload.teamNameB,
                     NumberOfPlayersB: action.payload.NumberOfPlayersB
+                    
                 }
         ];
         default:

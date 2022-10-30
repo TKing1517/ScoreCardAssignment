@@ -15,7 +15,9 @@ const reducer = (state,action) => {
                     date: action.payload.date,
                     rinkNumber: action.payload.rinkNumber,
                     teamNameA: action.payload.teamNameA,
+                    NumberOfPlayersA: action.payload.NumberOfPlayersA,
                     teamNameB: action.payload.teamNameB,
+                    NumberOfPlayersB: action.payload.NumberOfPlayersB
                 }
         ];
         default:
@@ -25,8 +27,8 @@ const reducer = (state,action) => {
 export const ItemProvider = ({children}) => {
     const [state, dispatch] = useReducer(reducer,gameDetails);
 
-    const createGame = (competitonName,date,rinkNumber,teamNameA,teamNameB) => {
-        dispatch({type: actionTypes.create, payload:{competitonName,date,rinkNumber,teamNameA,teamNameB}});
+    const createGame = (competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,NumberOfPlayersB) => {
+        dispatch({type: actionTypes.create, payload:{competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,NumberOfPlayersB}});
      
     };
 

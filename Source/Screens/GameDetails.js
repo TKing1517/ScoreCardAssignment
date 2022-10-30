@@ -9,10 +9,11 @@ const GameDetails = ({navigation}) => {
     const [rinkNumber, setRinkNumber] = useState("");
     const [date, setDate] = useState("");
     const [teamNameA, setTeamNameA] = useState("");
+    const [NumberOfPlayersA, setNumberOfPlayersA] = useState("");
     const [teamNameB, setTeamNameB] = useState("");
+    const [NumberOfPlayersB, setNumberOfPlayersB] = useState("");
   return (
     <View >
-      <Text>Please input the details of the game below</Text>
       <Text style={styles.textLabel}>Competition Name:</Text>
             <TextInput style={styles.textInput} 
             placeholder="Type competition name here"
@@ -49,6 +50,15 @@ const GameDetails = ({navigation}) => {
             numberOfLines={1}
             maxLength={10}
             />
+        <Text style={styles.textLabel}>Number of players in team A:</Text>
+            <TextInput style={styles.textInput} 
+            placeholder="Type number here"
+            value={NumberOfPlayersA}
+            onChangeText={(text) => {setNumberOfPlayersA(text);}}
+            multiline={false}
+            numberOfLines={1}
+            maxLength={10}
+            />
         <Text style={styles.textLabel}>Team Name B:</Text>
             <TextInput style={styles.textInput} 
             placeholder="Type team name B here"
@@ -58,9 +68,17 @@ const GameDetails = ({navigation}) => {
             numberOfLines={1}
             maxLength={10}
             />    
-      <NavigationButton screenName="NumberOfPlayers" navigation={navigation}/>
+        <Text style={styles.textLabel}>Team Name B:</Text>
+            <TextInput style={styles.textInput} 
+            placeholder="Type team name B here"
+            value={NumberOfPlayersB}
+            onChangeText={(text) => {setNumberOfPlayersB(text);}}
+            multiline={false}
+            numberOfLines={1}
+            maxLength={10}
+            />     
       <Button title = "submit items" onPress ={() => {
-               create(competitonName,date,rinkNumber,teamNameA,teamNameB, () => navigation.pop());
+               create(competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,NumberOfPlayersB, () => navigation.pop());
             }}
         />
         <FlatList
@@ -75,7 +93,9 @@ const GameDetails = ({navigation}) => {
                         date: item.date,
                         rinkNumber: item.rinkNumber,
                         teamNameA: item.teamNameA,
-                        teamNameB: item.teamNameB
+                        NumberOfPlayersA: item.NumberOfPlayersA,
+                        teamNameB: item.teamNameB,
+                        NumberOfPlayersB: item.NumberOfPlayersB
                     })}>
                     <><Text>{item.id}</Text></>
                     </Pressable>

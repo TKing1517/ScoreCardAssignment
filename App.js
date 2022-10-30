@@ -2,7 +2,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LandingPage from './Source/Screens/LandingPage';
 import { ItemProvider } from './Source/Contexts/ItemContext';
-import NumberOfPlayers from './Source/Screens/NumberOfPlayers';
 import GameDetails from './Source/Screens/GameDetails';
 import ViewGamesScreen from './Source/Screens/ViewGamesScreen';
 
@@ -20,12 +19,7 @@ const App = () => {
           <Stack.Screen
             name='GameDetails'
             component = {GameDetails}
-            options = {{title:"Details of the game"}}
-          />
-          <Stack.Screen
-            name='NumberOfPlayers'
-            component = {NumberOfPlayers}
-            options = {{title:"How many players are there?"}}
+            options = {{title:"Input the details of the game"}}
           />
           <Stack.Screen
             name='ViewGamesScreen'

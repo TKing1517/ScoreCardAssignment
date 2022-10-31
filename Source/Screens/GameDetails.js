@@ -5,7 +5,7 @@ import { useState, useContext } from "react";
 import ItemContext from '../Contexts/ItemContext';
 
 const GameDetails = ({navigation}) => {
-    const {state,create} = useContext(ItemContext);
+    const {GameDetailsState,create} = useContext(ItemContext);
 
     const [competitonName, setcompetitionName] = useState("");
     const [rinkNumber, setRinkNumber] = useState("");
@@ -30,6 +30,7 @@ const GameDetails = ({navigation}) => {
         <Text style={styles.textLabel}>Rink Number:</Text>
             <TextInput style={styles.textInput} 
             placeholder="Type rink number here"
+            keyboardType = 'numeric'
             value={rinkNumber}
             onChangeText={(text) => {setRinkNumber(text);}}
             multiline={false}
@@ -47,6 +48,7 @@ const GameDetails = ({navigation}) => {
             />
         <Text style={styles.textLabel}>Number of players in team A:</Text>
             <TextInput style={styles.textInput} 
+            keyboardType = 'numeric'
             placeholder="Type number here"
             value={NumberOfPlayersA}
             onChangeText={(text) => {setNumberOfPlayersA(text);}}
@@ -54,6 +56,7 @@ const GameDetails = ({navigation}) => {
             numberOfLines={1}
             maxLength={1}
             />
+
         <Text style={styles.textLabel}>Team Name B:</Text>
             <TextInput style={styles.textInput} 
             placeholder="Type team name B here"
@@ -65,19 +68,22 @@ const GameDetails = ({navigation}) => {
             />    
         <Text style={styles.textLabel}>Number of players in team B:</Text>
             <TextInput style={styles.textInput} 
+            keyboardType = 'numeric'
             placeholder="Type number here"
             value={NumberOfPlayersB}
             onChangeText={(text) => {setNumberOfPlayersB(text);}}
             multiline={false}
             numberOfLines={1}
             maxLength={1}
-            />     
-      <Button title = "submit items" onPress ={() => {
-               create(competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,NumberOfPlayersB, () => navigation.pop());
+            /> 
+        <NavigationButton screenName="PlayerNamesA" navigation={navigation}/>         
+        <Button title = "submit items" onPress ={() => {
+               (create(competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,NumberOfPlayersB), (() => navigation.navigate('PlayerNamesA')));
             }}
         />
+        
         <FlatList
-            data={state}
+            data={GameDetailsState}
             keyExtractor={(e) => e.id.toString()}
             renderItem={({item}) => {
                 return (
@@ -96,7 +102,7 @@ const GameDetails = ({navigation}) => {
                     </Pressable>
                 )
             }}
-            />
+        />
     </View>
   );
 }

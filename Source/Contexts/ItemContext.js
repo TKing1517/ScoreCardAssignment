@@ -2,43 +2,73 @@ import react, { useEffect, useReducer } from "react";
 import { actionTypes } from "../Helpers/actionTypes";
 
 const ItemContext = react.createContext();
-let gameDetails = []
-let PlayersA = []
-let PlayersB = []
-const reducer = (state,action) => {
-    switch(action.type){
+let gameDetails = [];
+let PlayersA = [];
+let PlayersB = [];
+let ID = '';
+const gameDetailsReducer = (GameDetailsState,GameDetailsAction) => {
+    ID = Math.floor(Math.random()*999999)
+    switch(GameDetailsAction.type){
         case actionTypes.create:
             return [
-                ...state,
+                ...GameDetailsState,
                 {
-                    id: Math.floor(Math.random()*99999),
-                    competitonName: action.payload.competitonName,
+                    id: ID,
+                    competitonName: GameDetailsAction.payload.competitonName,
                     date: new Date(),
-                    rinkNumber: action.payload.rinkNumber,
-                    teamNameA: action.payload.teamNameA,
-                    NumberOfPlayersA: action.payload.NumberOfPlayersA,
+                    rinkNumber: GameDetailsAction.payload.rinkNumber,
+                    teamNameA: GameDetailsAction.payload.teamNameA,
+                    NumberOfPlayersA: GameDetailsAction.payload.NumberOfPlayersA,
 
-                    teamNameB: action.payload.teamNameB,
-                    NumberOfPlayersB: action.payload.NumberOfPlayersB
+                    teamNameB: GameDetailsAction.payload.teamNameB,
+                    NumberOfPlayersB: GameDetailsAction.payload.NumberOfPlayersB
                     
                 }
         ];
         default:
-            return state;
+            return GameDetailsState;
     };
 };
+
+const PlayersAReducer = (PlayersAState,PlayersAAction) => {
+    switch(PlayersAAction.type){
+        case actionTypes.createTeamA:
+            return [
+                ...PlayersAState,
+                {
+                    id: ID,
+                    PlayerA1Name: PlayersAAction.payload.PlayerA1Name,
+                    PlayerA2Name: PlayersAAction.payload.PlayerA2Name,
+                    PlayerA3Name: PlayersAAction.payload.PlayerA3Name,
+                    PlayerA4Name: PlayersAAction.payload.PlayerA4Name,
+
+                }
+        ];
+        default:
+            return PlayersAState;
+    };
+};
+
 export const ItemProvider = ({children}) => {
-    const [state, dispatch] = useReducer(reducer,gameDetails);
+    const [gameDetailsState, dispatchGD] = useReducer(gameDetailsReducer,gameDetails);
+    const [PlayersAState, dispatchPA] = useReducer(PlayersAReducer,PlayersA);
 
     const createGame = (competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,NumberOfPlayersB) => {
-        dispatch({type: actionTypes.create, payload:{competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,NumberOfPlayersB}});
+        dispatchGD({type: actionTypes.create, payload:{competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,NumberOfPlayersB}});
+     
+    };
+
+    const createTeamA = (PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name) => {
+        dispatchPA({type: actionTypes.createTeamA, payload:{PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name}});
      
     };
 
     return (
         <ItemContext.Provider value={{
-            state:state,
+            GameDetailsState:gameDetailsState,
+            PlayersAState: PlayersAState,
             create: createGame,
+            createTeamA: createTeamA,
             }}>
             {children}
         </ItemContext.Provider>

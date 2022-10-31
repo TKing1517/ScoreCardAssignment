@@ -5,8 +5,8 @@ import { useContext } from "react";
 
 const ViewGamesScreen = ({navigation, route}) => {
     const {id, competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,NumberOfPlayersB} = route.params;
-    const{state} = useContext(ItemContext);
-    const currentEntry = state.find((e) => e.id===id);
+    const{GameDetailsState} = useContext(ItemContext);
+    const currentEntry = GameDetailsState.find((e) => e.id===id);
 
     return(
         <View>

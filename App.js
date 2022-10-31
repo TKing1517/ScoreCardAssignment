@@ -4,6 +4,8 @@ import LandingPage from './Source/Screens/LandingPage';
 import { ItemProvider } from './Source/Contexts/ItemContext';
 import GameDetails from './Source/Screens/GameDetails';
 import ViewGamesScreen from './Source/Screens/ViewGamesScreen';
+import PlayerNamesA from './Source/Screens/PlayerNamesA';
+import ViewPlayersAScreen from './Source/Screens/ViewPlayersAScreen';
 
 const App = () => {
   const Stack = createNativeStackNavigator();  
@@ -25,6 +27,16 @@ const App = () => {
             name='ViewGamesScreen'
             component = {ViewGamesScreen}
             options = {{title:"View games screen"}}
+          />
+          <Stack.Screen
+            name='PlayerNamesA'
+            component = {PlayerNamesA}
+            options = {{title:"Input player names for team A"}}
+          />
+          <Stack.Screen
+            name='ViewPlayersAScreen'
+            component = {ViewPlayersAScreen}
+            options = {{title:"Viewing Players for team A"}}
           />
         </Stack.Navigator>
       </NavigationContainer>

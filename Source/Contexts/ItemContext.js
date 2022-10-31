@@ -49,9 +49,29 @@ const PlayersAReducer = (PlayersAState,PlayersAAction) => {
     };
 };
 
+const PlayersBReducer = (PlayersBState,PlayersBAction) => {
+    switch(PlayersBAction.type){
+        case actionTypes.createTeamB:
+            return [
+                ...PlayersBState,
+                {
+                    id: ID,
+                    PlayerB1Name: PlayersBAction.payload.PlayerB1Name,
+                    PlayerB2Name: PlayersBAction.payload.PlayerB2Name,
+                    PlayerB3Name: PlayersBAction.payload.PlayerB3Name,
+                    PlayerB4Name: PlayersBAction.payload.PlayerB4Name,
+
+                }
+        ];
+        default:
+            return PlayersBState;
+    };
+};
+
 export const ItemProvider = ({children}) => {
     const [gameDetailsState, dispatchGD] = useReducer(gameDetailsReducer,gameDetails);
     const [PlayersAState, dispatchPA] = useReducer(PlayersAReducer,PlayersA);
+    const [PlayersBState, dispatchPB] = useReducer(PlayersBReducer,PlayersB);
 
     const createGame = (competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,NumberOfPlayersB) => {
         dispatchGD({type: actionTypes.create, payload:{competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,NumberOfPlayersB}});
@@ -63,12 +83,19 @@ export const ItemProvider = ({children}) => {
      
     };
 
+    const createTeamB = (PlayerB1Name,PlayerB2Name,PlayerB3Name,PlayerB4Name) => {
+        dispatchPB({type: actionTypes.createTeamB, payload:{PlayerB1Name,PlayerB2Name,PlayerB3Name,PlayerB4Name}});
+     
+    };
+
     return (
         <ItemContext.Provider value={{
             GameDetailsState:gameDetailsState,
             PlayersAState: PlayersAState,
+            PlayersBState: PlayersBState,
             create: createGame,
             createTeamA: createTeamA,
+            createTeamB: createTeamB,
             }}>
             {children}
         </ItemContext.Provider>

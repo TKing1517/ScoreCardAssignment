@@ -6,6 +6,8 @@ import GameDetails from './Source/Screens/GameDetails';
 import ViewGamesScreen from './Source/Screens/ViewGamesScreen';
 import PlayerNamesA from './Source/Screens/PlayerNamesA';
 import ViewPlayersAScreen from './Source/Screens/ViewPlayersAScreen';
+import PlayerNamesB from './Source/Screens/PlayerNamesB';
+import ViewPlayersBScreen from './Source/Screens/ViewPlayersBScreen';
 
 const App = () => {
   const Stack = createNativeStackNavigator();  
@@ -37,6 +39,16 @@ const App = () => {
             name='ViewPlayersAScreen'
             component = {ViewPlayersAScreen}
             options = {{title:"Viewing Players for team A"}}
+          />
+           <Stack.Screen
+            name='PlayerNamesB'
+            component = {PlayerNamesB}
+            options = {{title:"Input player names for team B"}}
+          />
+          <Stack.Screen
+            name='ViewPlayersBScreen'
+            component = {ViewPlayersBScreen}
+            options = {{title:"Viewing Players for team B"}}
           />
         </Stack.Navigator>
       </NavigationContainer>

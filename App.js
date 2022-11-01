@@ -8,6 +8,9 @@ import PlayerNamesA from './Source/Screens/PlayerNamesA';
 import ViewPlayersAScreen from './Source/Screens/ViewPlayersAScreen';
 import PlayerNamesB from './Source/Screens/PlayerNamesB';
 import ViewPlayersBScreen from './Source/Screens/ViewPlayersBScreen';
+import WhichTeamShot from './Source/Screens/WhichTeamShot';
+import TeamAShot from './Source/Screens/TeamAShot';
+import TeamBShot from './Source/Screens/TeamBShot';
 
 const App = () => {
   const Stack = createNativeStackNavigator();  
@@ -49,6 +52,21 @@ const App = () => {
             name='ViewPlayersBScreen'
             component = {ViewPlayersBScreen}
             options = {{title:"Viewing Players for team B"}}
+          />
+          <Stack.Screen
+            name='WhichTeamShot'
+            component = {WhichTeamShot}
+            options = {{title:"Which team shot this end?"}}
+          />
+          <Stack.Screen
+            name='TeamAShot'
+            component = {TeamAShot}
+            options = {{title:"Team A shot"}}
+          />
+          <Stack.Screen
+            name='TeamBShot'
+            component = {TeamBShot}
+            options = {{title:"Team B shot"}}
           />
         </Stack.Navigator>
       </NavigationContainer>

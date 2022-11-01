@@ -6,6 +6,10 @@ let gameDetails = [];
 let PlayersA = [];
 let PlayersB = [];
 let ID = '';
+let counter = 0;
+let End = 0;
+let TeamATotal = [];
+let TeamBTotal = []; 
 const gameDetailsReducer = (GameDetailsState,GameDetailsAction) => {
     ID = Math.floor(Math.random()*999999)
     switch(GameDetailsAction.type){
@@ -68,10 +72,34 @@ const PlayersBReducer = (PlayersBState,PlayersBAction) => {
     };
 };
 
+const TeamATotalReducer = (TeamATotalState,TeamATotalAction) => {
+    switch(TeamATotalAction.type){
+        case actionTypes.createTotalA:
+            return [
+                ...TeamATotalState,
+                {
+                    id: ID,
+                    TeamATotal: TeamATotalAction.payload.TeamATotal,
+                }
+        ];
+        case actionTypes.updateTotalA:
+            return TeamATotalState.map((e) => {
+                if (e.id === TeamATotalAction.payload.id){
+                    return TeamATotalAction.payload;                    
+                } else {
+                    return e;
+                }
+            });
+        default:
+            return TeamATotalState;
+    };
+};
+
 export const ItemProvider = ({children}) => {
     const [gameDetailsState, dispatchGD] = useReducer(gameDetailsReducer,gameDetails);
     const [PlayersAState, dispatchPA] = useReducer(PlayersAReducer,PlayersA);
     const [PlayersBState, dispatchPB] = useReducer(PlayersBReducer,PlayersB);
+    const [TeamATotalState,dispatchTA] = useReducer(TeamATotalReducer,TeamATotal);
 
     const createGame = (competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,NumberOfPlayersB) => {
         dispatchGD({type: actionTypes.create, payload:{competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,NumberOfPlayersB}});
@@ -88,14 +116,34 @@ export const ItemProvider = ({children}) => {
      
     };
 
+    const createTotalA = (TeamATotal) => {
+        dispatchTA({type: actionTypes.createTotalA, payload:{TeamATotal}});
+     
+    };
+
+    const updateTotalA = (id, TeamATotal,callback) => {
+        dispatchTA({type: actionTypes.updateTotalA, payload:{id, TeamATotal}});
+        if (callback) callback();
+    };
+
+    const incrementCounter =() => {
+        counter = counter + 1;
+    }
     return (
         <ItemContext.Provider value={{
             GameDetailsState:gameDetailsState,
             PlayersAState: PlayersAState,
             PlayersBState: PlayersBState,
+            TeamATotalState: TeamATotalState,
+            ID,
+            counter,
+            TeamATotal,
             create: createGame,
             createTeamA: createTeamA,
             createTeamB: createTeamB,
+            createTotalA: createTotalA,
+            updateTotalA: updateTotalA,
+            incrementCounter: incrementCounter,
             }}>
             {children}
         </ItemContext.Provider>

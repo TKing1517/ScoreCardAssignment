@@ -2,6 +2,7 @@ import React from "react";
 import { View,Text,StyleSheet,TextInput,Button,FlatList,Pressable } from "react-native";
 import { useState, useContext } from "react";
 import ItemContext from "../Contexts/ItemContext";
+import NavigationButton from "../Components/NavigationButton";
 
 const PlayerNamesB = ({navigation, route}) => {
     const {PlayersBState,createTeamB} = useContext(ItemContext);
@@ -48,8 +49,9 @@ const PlayerNamesB = ({navigation, route}) => {
                 numberOfLines={1}
                 maxLength={20}
             />
+            <NavigationButton screenName="WhichTeamShot" navigation={navigation}/>
             <Button title = "submit items" onPress ={() => {
-               createTeamB(PlayerB1Name,PlayerB2Name,PlayerB3Name,PlayerB4Name, () => navigation.pop());
+               createTeamB(PlayerB1Name,PlayerB2Name,PlayerB3Name,PlayerB4Name, () => navigation.navigate('WhichTeamShot'));
             }}
             />
             <FlatList

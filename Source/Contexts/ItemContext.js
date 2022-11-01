@@ -116,9 +116,9 @@ export const ItemProvider = ({children}) => {
      
     };
 
-    const createTotalA = (TeamATotal) => {
+    const createTotalA = (TeamATotal,callback) => {
         dispatchTA({type: actionTypes.createTotalA, payload:{TeamATotal}});
-     
+        if (callback) callback();
     };
 
     const updateTotalA = (id, TeamATotal,callback) => {

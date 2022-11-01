@@ -9,12 +9,13 @@ const TeamAShot = ({navigation}) => {
     
     const [localTeamATotal, setTeamATotal] = useState(0);
     const [DifferentCounter, setDCounter] = useState(0);
-    let MyObject = TeamATotalState.find((e) => (e.id===ID));
-    console.log({MyObject})
-    if (MyObject != null && DifferentCounter === 0){
+    
+    let CurrentEntry = TeamATotalState.find((e) => (e.id===ID));
+    console.log({CurrentEntry})
+    if (CurrentEntry != null && DifferentCounter === 0){
         console.log('Works1');
-        if (MyObject.TeamATotal > 0){
-            setTeamATotal(MyObject.TeamATotal);
+        if (CurrentEntry.TeamATotal > 0){
+            setTeamATotal(CurrentEntry.TeamATotal);
             console.log('Works2');
             setDCounter(1);
         } 
@@ -45,7 +46,7 @@ const TeamAShot = ({navigation}) => {
                 console.log('yes');
             } else {
                 setTeamATotal(parseInt(localTeamATotal) + parseInt(TeamAShot));
-                updateTotalA(ID,localTeamATotal)  
+                updateTotalA(ID,(parseInt(localTeamATotal))) 
                 console.log('no'); 
             }
                     

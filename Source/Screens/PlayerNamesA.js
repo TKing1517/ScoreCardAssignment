@@ -51,7 +51,7 @@ const PlayerNamesA = ({navigation, route}) => {
             />
             <NavigationButton screenName="PlayerNamesB" navigation={navigation}/>  
             <Button title = "submit items" onPress ={() => {
-               createTeamA(PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name, () => navigation.navigate('PlayerNamesB'));
+               createTeamA(PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name), navigation.navigate('PlayerNamesB');
             }}
             />
             <FlatList

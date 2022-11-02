@@ -4,4 +4,8 @@ export const actionTypes={
     createTeamB: 'Create',
     createTotalA: 'Create',
     updateTotalA: 'Update',
+    createScores: 'Create',
+    updateScores: 'Update',
+    createTotalB: 'Create',
+    updateTotalB: 'Update',
 };

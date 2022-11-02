@@ -66,7 +66,7 @@ const TeamAShot = ({navigation}) => {
             }
             
             let ScoretoStore = (parseInt(TeamAShot) + "A")
-               
+          
                 
             if (End === 2){
                 updateScores(ID,found.ScoreEnd1,ScoretoStore)

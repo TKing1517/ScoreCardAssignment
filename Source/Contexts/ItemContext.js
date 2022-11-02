@@ -128,35 +128,7 @@ const ScoresReducer = (ScoresState,ScoresAction) => {
                 {
                     id: ID,
                     ScoreEnd1: ScoresAction.payload.ScoreEnd1,
-                    ScoreEnd2: ScoresAction.payload.ScoreEnd2,
-                    ScoreEnd3: ScoresAction.payload.ScoreEnd3,
-                    ScoreEnd4: ScoresAction.payload.ScoreEnd4,
-                    ScoreEnd5: ScoresAction.payload.ScoreEnd5,
-                    ScoreEnd6: ScoresAction.payload.ScoreEnd6,
-                    ScoreEnd7: ScoresAction.payload.ScoreEnd7,
-                    ScoreEnd8: ScoresAction.payload.ScoreEnd8,
-                    ScoreEnd9: ScoresAction.payload.ScoreEnd9,
-                    ScoreEnd10: ScoresAction.payload.ScoreEnd10,
-                    ScoreEnd11: ScoresAction.payload.ScoreEnd11,
-                    ScoreEnd12: ScoresAction.payload.ScoreEnd12,
-                    ScoreEnd13: ScoresAction.payload.ScoreEnd13,
-                    ScoreEnd14: ScoresAction.payload.ScoreEnd14,
-                    ScoreEnd15: ScoresAction.payload.ScoreEnd15,
-                    ScoreEnd16: ScoresAction.payload.ScoreEnd16,
-                    ScoreEnd17: ScoresAction.payload.ScoreEnd17,
-                    ScoreEnd18: ScoresAction.payload.ScoreEnd18,
-                    ScoreEnd19: ScoresAction.payload.ScoreEnd19,
-                    ScoreEnd20: ScoresAction.payload.ScoreEnd20,
-                    ScoreEnd21: ScoresAction.payload.ScoreEnd21,
-                    ScoreEnd22: ScoresAction.payload.ScoreEnd22,
-                    ScoreEnd23: ScoresAction.payload.ScoreEnd23,
-                    ScoreEnd24: ScoresAction.payload.ScoreEnd24,
-                    ScoreEnd25: ScoresAction.payload.ScoreEnd25,
-                    ScoreEnd26: ScoresAction.payload.ScoreEnd26,
-                    ScoreEnd27: ScoresAction.payload.ScoreEnd27,
-                    ScoreEnd28: ScoresAction.payload.ScoreEnd28,
-                    ScoreEnd29: ScoresAction.payload.ScoreEnd29,
-                    ScoreEnd30: ScoresAction.payload.ScoreEnd30,
+            
                 }
         ];
         case actionTypes.updateScores:
@@ -216,12 +188,8 @@ export const ItemProvider = ({children}) => {
         if (callback) callback();
     };
 
-    const createScores = (ScoreEnd1,ScoreEnd2,ScoreEnd3,ScoreEnd4,ScoreEnd5,ScoreEnd6,ScoreEnd7,ScoreEnd8,ScoreEnd9,ScoreEnd10,
-        ScoreEnd11,ScoreEnd12,ScoreEnd13,ScoreEnd14,ScoreEnd15,ScoreEnd16,ScoreEnd17,ScoreEnd18,ScoreEnd19,ScoreEnd20,ScoreEnd21,ScoreEnd22,ScoreEnd23,
-        ScoreEnd24,ScoreEnd25,ScoreEnd26,ScoreEnd27,ScoreEnd28,ScoreEnd29,ScoreEnd30,callback) => {
-            dispatchSE({type: actionTypes.createScores, payload:{ScoreEnd1,ScoreEnd2,ScoreEnd3,ScoreEnd4,ScoreEnd5,ScoreEnd6,ScoreEnd7,ScoreEnd8,ScoreEnd9,ScoreEnd10,
-            ScoreEnd11,ScoreEnd12,ScoreEnd13,ScoreEnd14,ScoreEnd15,ScoreEnd16,ScoreEnd17,ScoreEnd18,ScoreEnd19,ScoreEnd20,ScoreEnd21,ScoreEnd22,ScoreEnd23,
-            ScoreEnd24,ScoreEnd25,ScoreEnd26,ScoreEnd27,ScoreEnd28,ScoreEnd29,ScoreEnd30}});
+    const createScores = (ScoreEnd1,callback) => {
+            dispatchSE({type: actionTypes.createScores, payload:{ScoreEnd1}});
         if (callback) callback();
     };
 

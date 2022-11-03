@@ -76,7 +76,7 @@ const GameDetails = ({navigation}) => {
             numberOfLines={1}
             maxLength={1}
             /> 
-        <NavigationButton screenName="PlayerNamesA" navigation={navigation}/>         
+         
         <Button title = "submit items" onPress ={() => {
                create(competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,NumberOfPlayersB), navigation.navigate('PlayerNamesA');
             }}

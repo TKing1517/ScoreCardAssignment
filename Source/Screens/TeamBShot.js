@@ -17,10 +17,8 @@ const TeamBShot = ({navigation}) => {
     let CurrentEntry = TeamBTotalState.find((e) => (e.id===ID));
     console.log({CurrentEntry})
     if (CurrentEntry != null && DifferentCounter === 0){
-        console.log('Works1');
         if (CurrentEntry.TeamBTotal > 0){
             setTeamBTotal(CurrentEntry.TeamBTotal);
-            console.log('Works2');
             setDCounter(1);
         } 
     }

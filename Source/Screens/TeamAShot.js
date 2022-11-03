@@ -17,10 +17,8 @@ const TeamAShot = ({navigation}) => {
     let CurrentEntry = TeamATotalState.find((e) => (e.id===ID));
     console.log({CurrentEntry})
     if (CurrentEntry != null && DifferentCounter === 0){
-        console.log('Works1');
         if (CurrentEntry.TeamATotal > 0){
             setTeamATotal(CurrentEntry.TeamATotal);
-            console.log('Works2');
             setDCounter(1);
         } 
     }

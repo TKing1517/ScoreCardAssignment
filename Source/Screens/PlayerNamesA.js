@@ -49,7 +49,7 @@ const PlayerNamesA = ({navigation, route}) => {
                 numberOfLines={1}
                 maxLength={20}
             />
-            <NavigationButton screenName="PlayerNamesB" navigation={navigation}/>  
+ 
             <Button title = "submit items" onPress ={() => {
                createTeamA(PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name), navigation.navigate('PlayerNamesB');
             }}

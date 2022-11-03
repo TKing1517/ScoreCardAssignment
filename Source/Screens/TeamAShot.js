@@ -40,7 +40,9 @@ const TeamAShot = ({navigation}) => {
             numberOfLines={1}
             maxLength={10}
         />
+        
         <Button title = "input shot" onPress ={() => {
+            //Help here, why is the createTotalA not updating on time?
             if (localcounter === 0 ){
                 setTeamATotal(parseInt(TeamAShot));
                 
@@ -65,7 +67,7 @@ const TeamAShot = ({navigation}) => {
             
             let ScoretoStore = (parseInt(TeamAShot) + "A")
           
-                
+            //Help here, clean up this mess    
             if (End === 2){
                 updateScores(ID,found.ScoreEnd1,ScoretoStore)
             } else if (End === 3){

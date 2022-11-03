@@ -1,5 +1,13 @@
 import react, { useEffect, useReducer } from "react";
 import { actionTypes } from "../Helpers/actionTypes";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+const GameDetails_KEY = "GameDetailsPassword";
+const PlayersA_KEY = "PlayersAPassword";
+const PlayersB_KEY = "PlayersBPassword";
+const TeamATotal_KEY = "TeamATotalPassword";
+const TeamBTotal_KEY = "TeamBTotalPassword";
+const Scores_KEY = "ScoresPassword";
 
 const ItemContext = react.createContext();
 let gameDetails = [];
@@ -25,12 +33,19 @@ const gameDetailsReducer = (GameDetailsState,GameDetailsAction) => {
                     rinkNumber: GameDetailsAction.payload.rinkNumber,
                     teamNameA: GameDetailsAction.payload.teamNameA,
                     NumberOfPlayersA: GameDetailsAction.payload.NumberOfPlayersA,
-
                     teamNameB: GameDetailsAction.payload.teamNameB,
                     NumberOfPlayersB: GameDetailsAction.payload.NumberOfPlayersB
                     
                 }
         ];
+        case actionTypes.saveGameDetails:
+            try{
+                AsyncStorage.setItem(GameDetails_KEY, JSON.stringify(GameDetailsState));
+            } catch(e) {
+                console.log(e);
+            } finally {
+                return GameDetailsState;
+            }
         default:
             return GameDetailsState;
     };
@@ -50,6 +65,14 @@ const PlayersAReducer = (PlayersAState,PlayersAAction) => {
 
                 }
         ];
+        case actionTypes.saveGameDetails:
+            try{
+                AsyncStorage.setItem(PlayersA_KEY, JSON.stringify(PlayersAState));
+            } catch(e) {
+                console.log(e);
+            } finally {
+                return PlayersAState;
+            }
         default:
             return PlayersAState;
     };
@@ -69,6 +92,14 @@ const PlayersBReducer = (PlayersBState,PlayersBAction) => {
 
                 }
         ];
+        case actionTypes.saveGameDetails:
+            try{
+                AsyncStorage.setItem(PlayersB_KEY, JSON.stringify(PlayersBState));
+            } catch(e) {
+                console.log(e);
+            } finally {
+                return PlayersBState;
+            }
         default:
             return PlayersBState;
     };
@@ -92,6 +123,14 @@ const TeamATotalReducer = (TeamATotalState,TeamATotalAction) => {
                     return e;
                 }
             });
+        case actionTypes.saveGameDetails:
+            try{
+                AsyncStorage.setItem(TeamATotal_KEY, JSON.stringify(TeamATotalState));
+            } catch(e) {
+                console.log(e);
+            } finally {
+                return TeamATotalState;
+            }
         default:
             return TeamATotalState;
     };
@@ -115,6 +154,14 @@ const TeamBTotalReducer = (TeamBTotalState,TeamBTotalAction) => {
                     return e;
                 }
             });
+        case actionTypes.saveGameDetails:
+            try{
+                AsyncStorage.setItem(TeamBTotal_KEY, JSON.stringify(TeamBTotalState));
+            } catch(e) {
+                console.log(e);
+            } finally {
+                return TeamBTotalState;
+            }
         default:
             return TeamBTotalState;
     };
@@ -139,6 +186,14 @@ const ScoresReducer = (ScoresState,ScoresAction) => {
                     return e;
                 }
             });
+        case actionTypes.saveGameDetails:
+            try{
+                AsyncStorage.setItem(Scores_KEY, JSON.stringify(ScoresState));
+            } catch(e) {
+                console.log(e);
+            } finally {
+                return ScoresState;
+            }
         default:
             return ScoresState;
     };
@@ -155,41 +210,47 @@ export const ItemProvider = ({children}) => {
 
     const createGame = (competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,NumberOfPlayersB) => {
         dispatchGD({type: actionTypes.create, payload:{competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,NumberOfPlayersB}});
+        dispatchGD({type: actionTypes.saveGameDetails})
      
     };
 
     const createTeamA = (PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name) => {
         dispatchPA({type: actionTypes.createTeamA, payload:{PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name}});
-     
+        dispatchPA({type: actionTypes.saveGameDetails})
     };
 
     const createTeamB = (PlayerB1Name,PlayerB2Name,PlayerB3Name,PlayerB4Name) => {
         dispatchPB({type: actionTypes.createTeamB, payload:{PlayerB1Name,PlayerB2Name,PlayerB3Name,PlayerB4Name}});
-     
+        dispatchPB({type: actionTypes.saveGameDetails})
     };
 
     const createTotalA = (TeamATotal,callback) => {
         dispatchTA({type: actionTypes.createTotalA, payload:{TeamATotal}});
+        dispatchTA({type: actionTypes.saveGameDetails})
         if (callback) callback();
     };
 
     const updateTotalA = (id, TeamATotal,callback) => {
         dispatchTA({type: actionTypes.updateTotalA, payload:{id, TeamATotal}});
+        dispatchTA({type: actionTypes.saveGameDetails})
         if (callback) callback();
     };
 
     const createTotalB = (TeamBTotal,callback) => {
         dispatchTB({type: actionTypes.createTotalB, payload:{TeamBTotal}});
+        dispatchTB({type: actionTypes.saveGameDetails})
         if (callback) callback();
     };
 
     const updateTotalB = (id, TeamBTotal,callback) => {
         dispatchTB({type: actionTypes.updateTotalB, payload:{id, TeamBTotal}});
+        dispatchTB({type: actionTypes.saveGameDetails})
         if (callback) callback();
     };
 
     const createScores = (ScoreEnd1,callback) => {
-            dispatchSE({type: actionTypes.createScores, payload:{ScoreEnd1}});
+        dispatchSE({type: actionTypes.createScores, payload:{ScoreEnd1}});
+        dispatchSE({type: actionTypes.saveGameDetails})
         if (callback) callback();
     };
 
@@ -199,6 +260,7 @@ export const ItemProvider = ({children}) => {
             dispatchSE({type: actionTypes.updateScores, payload:{id,ScoreEnd1,ScoreEnd2,ScoreEnd3,ScoreEnd4,ScoreEnd5,ScoreEnd6,ScoreEnd7,ScoreEnd8,ScoreEnd9,ScoreEnd10,
             ScoreEnd11,ScoreEnd12,ScoreEnd13,ScoreEnd14,ScoreEnd15,ScoreEnd16,ScoreEnd17,ScoreEnd18,ScoreEnd19,ScoreEnd20,ScoreEnd21,ScoreEnd22,ScoreEnd23,
             ScoreEnd24,ScoreEnd25,ScoreEnd26,ScoreEnd27,ScoreEnd28,ScoreEnd29,ScoreEnd30}});
+        dispatchSE({type: actionTypes.saveGameDetails})
         if (callback) callback();
     };
 

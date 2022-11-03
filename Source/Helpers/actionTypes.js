@@ -8,4 +8,5 @@ export const actionTypes={
     updateScores: 'Update',
     createTotalB: 'Create',
     updateTotalB: 'Update',
+    saveGameDetails: 'Save',
 };

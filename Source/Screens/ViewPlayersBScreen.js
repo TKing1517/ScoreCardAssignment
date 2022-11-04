@@ -4,17 +4,18 @@ import ItemContext from "../Contexts/ItemContext";
 import { useContext } from "react";
 
 const ViewPlayersBScreen = ({navigation, route}) => {
-    const {id, PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name} = route.params;
-    const{PlayersAState} = useContext(ItemContext);
-    const currentEntry = PlayersAState.find((e) => e.id===id);
+
+    const{GameDetailsState,ID} = useContext(ItemContext);
+    console.log(GameDetailsState);
+    const currentEntry = GameDetailsState.find((e) => e.id===ID);
 
     return(
         <View>
-            <Text>ID: {id} </Text>
-            <Text>PlayerA1Name: {currentEntry.PlayerA1Name} </Text>
-            <Text>PlayerA2Name: {currentEntry.PlayerA2Name} </Text>
-            <Text>PlayerA3Name: {currentEntry.PlayerA3Name} </Text>
-            <Text>PlayerA4Name: {currentEntry.PlayerA4Name}</Text>
+            <Text>ID: {ID} </Text>
+            <Text>PlayerB1Name: {currentEntry.PlayerB1Name} </Text>
+            <Text>PlayerB2Name: {currentEntry.PlayerB2Name} </Text>
+            <Text>PlayerB3Name: {currentEntry.PlayerB3Name} </Text>
+            <Text>PlayerB4Name: {currentEntry.PlayerB4Name}</Text>
         </View>
     );
 };

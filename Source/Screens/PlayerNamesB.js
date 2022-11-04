@@ -5,7 +5,7 @@ import ItemContext from "../Contexts/ItemContext";
 import NavigationButton from "../Components/NavigationButton";
 
 const PlayerNamesB = ({navigation, route}) => {
-    const {PlayersBState,createTeamB} = useContext(ItemContext);
+    const {GameDetailsState,createTeamB,ID} = useContext(ItemContext);
 
     const [PlayerB1Name, setPlayerB1Name] = useState("");
     const [PlayerB2Name, setPlayerB2Name] = useState("");
@@ -51,24 +51,16 @@ const PlayerNamesB = ({navigation, route}) => {
             />
 
             <Button title = "submit items" onPress ={() => {
-               createTeamB(PlayerB1Name,PlayerB2Name,PlayerB3Name,PlayerB4Name),navigation.navigate('WhichTeamShot');
+               createTeamB(ID,PlayerB1Name,PlayerB2Name,PlayerB3Name,PlayerB4Name),navigation.navigate('WhichTeamShot');
             }}
             />
+            <NavigationButton screenName="ViewPlayersBScreen" navigation={navigation}/>
             <FlatList
-            data={PlayersBState}
+            data={GameDetailsState}
             keyExtractor={(e) => e.id.toString()}
                 renderItem={({item}) => {
                     return (
-                        
-                        <Pressable onPress={() => navigation.navigate('ViewPlayersBScreen',{
-                            id: item.id,
-                            PlayerB1Name: item.PlayerB1Name,
-                            PlayerB2Name: item.PlayerB2Name,
-                            PlayerB3Name: item.PlayerB3Name,
-                            PlayerB4Name: item.PlayerB4Name,
-                        })}>
                         <><Text>{item.id}</Text></>
-                        </Pressable>
                     )
                 }}
             />

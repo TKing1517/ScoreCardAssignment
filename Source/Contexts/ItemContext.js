@@ -13,15 +13,15 @@ const ItemContext = react.createContext();
 let gameDetails = [];
 let PlayersA = [];
 let PlayersB = [];
-let ID = '';
+let ID = Math.floor(Math.random()*999999);
 let counter = 0;
 let counterB = 0;
 let End = 1;
 let TeamATotal = [];
 let TeamBTotal = []; 
 let Scores = [];
-const gameDetailsReducer = (GameDetailsState,GameDetailsAction) => {
-    ID = Math.floor(Math.random()*999999)
+const gameDetailsReducer = (GameDetailsState,GameDetailsAction,TeamNamesAction) => {
+
     switch(GameDetailsAction.type){
         case actionTypes.create:
             return [
@@ -34,10 +34,26 @@ const gameDetailsReducer = (GameDetailsState,GameDetailsAction) => {
                     teamNameA: GameDetailsAction.payload.teamNameA,
                     NumberOfPlayersA: GameDetailsAction.payload.NumberOfPlayersA,
                     teamNameB: GameDetailsAction.payload.teamNameB,
-                    NumberOfPlayersB: GameDetailsAction.payload.NumberOfPlayersB
+                    NumberOfPlayersB: GameDetailsAction.payload.NumberOfPlayersB,
+                    PlayerA1Name: GameDetailsAction.payload.PlayerA1Name,
+                    PlayerA2Name: GameDetailsAction.payload.PlayerA2Name,
+                    PlayerA3Name: GameDetailsAction.payload.PlayerA3Name,
+                    PlayerA4Name: GameDetailsAction.payload.PlayerA4Name,
+                    PlayerB1Name: GameDetailsAction.payload.PlayerB1Name,
+                    PlayerB2Name: GameDetailsAction.payload.PlayerB2Name,
+                    PlayerB3Name: GameDetailsAction.payload.PlayerB3Name,
+                    PlayerB4Name: GameDetailsAction.payload.PlayerB4Name,
                     
                 }
         ];
+        case actionTypes.updatePlayerNames:
+            return GameDetailsState.map((e) => {
+                if (e.id === GameDetailsAction.payload.id){
+                    return GameDetailsAction.payload;                    
+                } else {
+                    return e;
+                }
+            });
         case actionTypes.saveGameDetails:
             try{
                 AsyncStorage.setItem(GameDetails_KEY, JSON.stringify(GameDetailsState));
@@ -51,59 +67,9 @@ const gameDetailsReducer = (GameDetailsState,GameDetailsAction) => {
     };
 };
 
-const PlayersAReducer = (PlayersAState,PlayersAAction) => {
-    switch(PlayersAAction.type){
-        case actionTypes.createTeamA:
-            return [
-                ...PlayersAState,
-                {
-                    id: ID,
-                    PlayerA1Name: PlayersAAction.payload.PlayerA1Name,
-                    PlayerA2Name: PlayersAAction.payload.PlayerA2Name,
-                    PlayerA3Name: PlayersAAction.payload.PlayerA3Name,
-                    PlayerA4Name: PlayersAAction.payload.PlayerA4Name,
 
-                }
-        ];
-        case actionTypes.saveGameDetails:
-            try{
-                AsyncStorage.setItem(PlayersA_KEY, JSON.stringify(PlayersAState));
-            } catch(e) {
-                console.log(e);
-            } finally {
-                return PlayersAState;
-            }
-        default:
-            return PlayersAState;
-    };
-};
 
-const PlayersBReducer = (PlayersBState,PlayersBAction) => {
-    switch(PlayersBAction.type){
-        case actionTypes.createTeamB:
-            return [
-                ...PlayersBState,
-                {
-                    id: ID,
-                    PlayerB1Name: PlayersBAction.payload.PlayerB1Name,
-                    PlayerB2Name: PlayersBAction.payload.PlayerB2Name,
-                    PlayerB3Name: PlayersBAction.payload.PlayerB3Name,
-                    PlayerB4Name: PlayersBAction.payload.PlayerB4Name,
 
-                }
-        ];
-        case actionTypes.saveGameDetails:
-            try{
-                AsyncStorage.setItem(PlayersB_KEY, JSON.stringify(PlayersBState));
-            } catch(e) {
-                console.log(e);
-            } finally {
-                return PlayersBState;
-            }
-        default:
-            return PlayersBState;
-    };
-};
 
 const TeamATotalReducer = (TeamATotalState,TeamATotalAction) => {
     switch(TeamATotalAction.type){
@@ -202,8 +168,7 @@ const ScoresReducer = (ScoresState,ScoresAction) => {
 
 export const ItemProvider = ({children}) => {
     const [gameDetailsState, dispatchGD] = useReducer(gameDetailsReducer,gameDetails);
-    const [PlayersAState, dispatchPA] = useReducer(PlayersAReducer,PlayersA);
-    const [PlayersBState, dispatchPB] = useReducer(PlayersBReducer,PlayersB);
+
     const [TeamATotalState,dispatchTA] = useReducer(TeamATotalReducer,TeamATotal);
     const [TeamBTotalState,dispatchTB] = useReducer(TeamBTotalReducer,TeamBTotal);
     const [ScoresState, dispatchSE] = useReducer(ScoresReducer,Scores);
@@ -214,14 +179,36 @@ export const ItemProvider = ({children}) => {
      
     };
 
-    const createTeamA = (PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name) => {
-        dispatchPA({type: actionTypes.createTeamA, payload:{PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name}});
-        dispatchPA({type: actionTypes.saveGameDetails})
+    const createTeamA = (id,PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name) => {
+        const currentEntry = gameDetailsState.find((e) => e.id===ID);
+        let competitonName = currentEntry.competitonName
+        let date = currentEntry.date
+        let rinkNumber = currentEntry.rinkNumber
+        let teamNameA = currentEntry.teamNameA
+        let NumberOfPlayersA = currentEntry.NumberOfPlayersA
+        let teamNameB = currentEntry.teamNameB
+        let NumberOfPlayersB = currentEntry.NumberOfPlayersB
+        dispatchGD({type: actionTypes.updatePlayerNames, payload:{id,competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,
+            teamNameB,NumberOfPlayersB,PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name}});
+        dispatchGD({type: actionTypes.saveGameDetails})
     };
 
-    const createTeamB = (PlayerB1Name,PlayerB2Name,PlayerB3Name,PlayerB4Name) => {
-        dispatchPB({type: actionTypes.createTeamB, payload:{PlayerB1Name,PlayerB2Name,PlayerB3Name,PlayerB4Name}});
-        dispatchPB({type: actionTypes.saveGameDetails})
+    const createTeamB = (id,PlayerB1Name,PlayerB2Name,PlayerB3Name,PlayerB4Name) => {
+        const currentEntry = gameDetailsState.find((e) => e.id===ID);
+        let competitonName = currentEntry.competitonName
+        let date = currentEntry.date
+        let rinkNumber = currentEntry.rinkNumber
+        let teamNameA = currentEntry.teamNameA
+        let NumberOfPlayersA = currentEntry.NumberOfPlayersA
+        let teamNameB = currentEntry.teamNameB
+        let NumberOfPlayersB = currentEntry.NumberOfPlayersB
+        let PlayerA1Name = currentEntry.PlayerA1Name
+        let PlayerA2Name = currentEntry.PlayerA2Name
+        let PlayerA3Name = currentEntry.PlayerA3Name
+        let PlayerA4Name = currentEntry.PlayerA4Name
+        dispatchGD({type: actionTypes.updatePlayerNames, payload:{id,competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,
+            NumberOfPlayersB,PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name,PlayerB1Name,PlayerB2Name,PlayerB3Name,PlayerB4Name}});
+        dispatchGD({type: actionTypes.saveGameDetails})
     };
 
     const createTotalA = (TeamATotal,callback) => {
@@ -279,8 +266,6 @@ export const ItemProvider = ({children}) => {
     return (
         <ItemContext.Provider value={{
             GameDetailsState:gameDetailsState,
-            PlayersAState: PlayersAState,
-            PlayersBState: PlayersBState,
             TeamATotalState: TeamATotalState,
             TeamBTotalState: TeamBTotalState,
             ScoresState: ScoresState,

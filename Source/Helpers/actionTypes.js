@@ -9,5 +9,5 @@ export const actionTypes={
     createTotalB: 'Create',
     updateTotalB: 'Update',
     saveGameDetails: 'Save',
-    updatePlayerNames: 'Update',
+    updateGameDetails: 'Update',
 };

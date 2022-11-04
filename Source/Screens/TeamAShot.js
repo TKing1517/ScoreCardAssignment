@@ -6,7 +6,7 @@ import WhichTeamShot from './WhichTeamShot';
 
 
 const TeamAShot = ({navigation}) => {
-    const {TeamATotalState,updateTotalA,createTotalA,ID,counter,incrementCounter,incrementEnd,createScores,updateScores,End,ScoresState} = useContext(ItemContext);
+    const {TeamATotalState,updateTotalA,createTotalA,ID,counter,incrementCounter,incrementEnd,createScores,updateScores,End,ScoresState,GameDetailsState} = useContext(ItemContext);
     
     const [localTeamATotal, setTeamATotal] = useState(0);
     const [DifferentCounter, setDCounter] = useState(0);
@@ -14,7 +14,7 @@ const TeamAShot = ({navigation}) => {
         return obj.id === ID;
     });
     console.log(ScoresState);
-    let CurrentEntry = TeamATotalState.find((e) => (e.id===ID));
+    let CurrentEntry = GameDetailsState.find((e) => (e.id===ID));
     console.log({CurrentEntry})
     if (CurrentEntry != null && DifferentCounter === 0){
         if (CurrentEntry.TeamATotal > 0){
@@ -46,7 +46,7 @@ const TeamAShot = ({navigation}) => {
             if (localcounter === 0 ){
                 setTeamATotal(parseInt(TeamAShot));
                 
-                createTotalA(localTeamATotal);
+                updateTotalA(ID,localTeamATotal);
                 setCounter(1);
                 console.log('yes');
                 let ScoretoStore = (parseInt(TeamAShot) + "A")
@@ -204,7 +204,7 @@ const TeamAShot = ({navigation}) => {
         />
         <Text>The current total is {localTeamATotal}</Text>
         <FlatList
-        data={TeamATotalState}
+        data={GameDetailsState}
         keyExtractor={(e) => e.id.toString()}
             renderItem={({item}) => {
                 return (   

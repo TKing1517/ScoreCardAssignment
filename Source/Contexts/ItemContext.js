@@ -11,14 +11,11 @@ const Scores_KEY = "ScoresPassword";
 
 const ItemContext = react.createContext();
 let gameDetails = [];
-let PlayersA = [];
-let PlayersB = [];
+
 let ID = Math.floor(Math.random()*999999);
 let counter = 0;
 let counterB = 0;
 let End = 1;
-let TeamATotal = [];
-let TeamBTotal = []; 
 let Scores = [];
 const gameDetailsReducer = (GameDetailsState,GameDetailsAction,TeamNamesAction) => {
 
@@ -43,10 +40,12 @@ const gameDetailsReducer = (GameDetailsState,GameDetailsAction,TeamNamesAction) 
                     PlayerB2Name: GameDetailsAction.payload.PlayerB2Name,
                     PlayerB3Name: GameDetailsAction.payload.PlayerB3Name,
                     PlayerB4Name: GameDetailsAction.payload.PlayerB4Name,
+                    TeamATotal: GameDetailsAction.payload.TeamATotal,
+                    TeamBTotal: GameDetailsAction.payload.TeamBTotal,
                     
                 }
         ];
-        case actionTypes.updatePlayerNames:
+        case actionTypes.updateGameDetails:
             return GameDetailsState.map((e) => {
                 if (e.id === GameDetailsAction.payload.id){
                     return GameDetailsAction.payload;                    
@@ -68,70 +67,6 @@ const gameDetailsReducer = (GameDetailsState,GameDetailsAction,TeamNamesAction) 
 };
 
 
-
-
-
-const TeamATotalReducer = (TeamATotalState,TeamATotalAction) => {
-    switch(TeamATotalAction.type){
-        case actionTypes.createTotalA:
-            return [
-                ...TeamATotalState,
-                {
-                    id: ID,
-                    TeamATotal: TeamATotalAction.payload.TeamATotal,
-                }
-        ];
-        case actionTypes.updateTotalA:
-            return TeamATotalState.map((e) => {
-                if (e.id === TeamATotalAction.payload.id){
-                    return TeamATotalAction.payload;                    
-                } else {
-                    return e;
-                }
-            });
-        case actionTypes.saveGameDetails:
-            try{
-                AsyncStorage.setItem(TeamATotal_KEY, JSON.stringify(TeamATotalState));
-            } catch(e) {
-                console.log(e);
-            } finally {
-                return TeamATotalState;
-            }
-        default:
-            return TeamATotalState;
-    };
-};
-
-const TeamBTotalReducer = (TeamBTotalState,TeamBTotalAction) => {
-    switch(TeamBTotalAction.type){
-        case actionTypes.createTotalB:
-            return [
-                ...TeamBTotalState,
-                {
-                    id: ID,
-                    TeamBTotal: TeamBTotalAction.payload.TeamBTotal,
-                }
-        ];
-        case actionTypes.updateTotalB:
-            return TeamBTotalState.map((e) => {
-                if (e.id === TeamBTotalAction.payload.id){
-                    return TeamBTotalAction.payload;                    
-                } else {
-                    return e;
-                }
-            });
-        case actionTypes.saveGameDetails:
-            try{
-                AsyncStorage.setItem(TeamBTotal_KEY, JSON.stringify(TeamBTotalState));
-            } catch(e) {
-                console.log(e);
-            } finally {
-                return TeamBTotalState;
-            }
-        default:
-            return TeamBTotalState;
-    };
-};
 
 const ScoresReducer = (ScoresState,ScoresAction) => {
     switch(ScoresAction.type){
@@ -168,9 +103,6 @@ const ScoresReducer = (ScoresState,ScoresAction) => {
 
 export const ItemProvider = ({children}) => {
     const [gameDetailsState, dispatchGD] = useReducer(gameDetailsReducer,gameDetails);
-
-    const [TeamATotalState,dispatchTA] = useReducer(TeamATotalReducer,TeamATotal);
-    const [TeamBTotalState,dispatchTB] = useReducer(TeamBTotalReducer,TeamBTotal);
     const [ScoresState, dispatchSE] = useReducer(ScoresReducer,Scores);
 
     const createGame = (competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,NumberOfPlayersB) => {
@@ -188,7 +120,7 @@ export const ItemProvider = ({children}) => {
         let NumberOfPlayersA = currentEntry.NumberOfPlayersA
         let teamNameB = currentEntry.teamNameB
         let NumberOfPlayersB = currentEntry.NumberOfPlayersB
-        dispatchGD({type: actionTypes.updatePlayerNames, payload:{id,competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,
+        dispatchGD({type: actionTypes.updateGameDetails, payload:{id,competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,
             teamNameB,NumberOfPlayersB,PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name}});
         dispatchGD({type: actionTypes.saveGameDetails})
     };
@@ -206,34 +138,76 @@ export const ItemProvider = ({children}) => {
         let PlayerA2Name = currentEntry.PlayerA2Name
         let PlayerA3Name = currentEntry.PlayerA3Name
         let PlayerA4Name = currentEntry.PlayerA4Name
-        dispatchGD({type: actionTypes.updatePlayerNames, payload:{id,competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,
+        dispatchGD({type: actionTypes.updateGameDetails, payload:{id,competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,
             NumberOfPlayersB,PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name,PlayerB1Name,PlayerB2Name,PlayerB3Name,PlayerB4Name}});
         dispatchGD({type: actionTypes.saveGameDetails})
     };
 
-    const createTotalA = (TeamATotal,callback) => {
-        dispatchTA({type: actionTypes.createTotalA, payload:{TeamATotal}});
-        dispatchTA({type: actionTypes.saveGameDetails})
-        if (callback) callback();
-    };
+
 
     const updateTotalA = (id, TeamATotal,callback) => {
-        dispatchTA({type: actionTypes.updateTotalA, payload:{id, TeamATotal}});
-        dispatchTA({type: actionTypes.saveGameDetails})
+        const currentEntry = gameDetailsState.find((e) => e.id===ID);
+        let competitonName = currentEntry.competitonName
+        let date = currentEntry.date
+        let rinkNumber = currentEntry.rinkNumber
+        let teamNameA = currentEntry.teamNameA
+        let NumberOfPlayersA = currentEntry.NumberOfPlayersA
+        let teamNameB = currentEntry.teamNameB
+        let NumberOfPlayersB = currentEntry.NumberOfPlayersB
+        let PlayerA1Name = currentEntry.PlayerA1Name
+        let PlayerA2Name = currentEntry.PlayerA2Name
+        let PlayerA3Name = currentEntry.PlayerA3Name
+        let PlayerA4Name = currentEntry.PlayerA4Name
+        let PlayerB1Name = currentEntry.PlayerB1Name
+        let PlayerB2Name = currentEntry.PlayerB2Name
+        let PlayerB3Name = currentEntry.PlayerB3Name
+        let PlayerB4Name = currentEntry.PlayerB4Name
+        if (currentEntry.TeamBTotal !== null){
+            let TeamBTotal = currentEntry.TeamBTotal
+            dispatchGD({type: actionTypes.updateTotalA, payload:{id,competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,
+                NumberOfPlayersB,PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name,PlayerB1Name,PlayerB2Name,
+                PlayerB3Name,PlayerB4Name, TeamATotal,TeamBTotal}});
+        } else {
+            dispatchGD({type: actionTypes.updateTotalA, payload:{id,competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,
+                NumberOfPlayersB,PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name,PlayerB1Name,PlayerB2Name,
+                PlayerB3Name,PlayerB4Name, TeamATotal}});
+        }
+        
+        dispatchGD({type: actionTypes.saveGameDetails})
         if (callback) callback();
     };
 
-    const createTotalB = (TeamBTotal,callback) => {
-        dispatchTB({type: actionTypes.createTotalB, payload:{TeamBTotal}});
-        dispatchTB({type: actionTypes.saveGameDetails})
+    const updateTotalB = (id,TeamBTotal,callback) => {
+        const currentEntry = gameDetailsState.find((e) => e.id===ID);
+        let competitonName = currentEntry.competitonName
+        let date = currentEntry.date
+        let rinkNumber = currentEntry.rinkNumber
+        let teamNameA = currentEntry.teamNameA
+        let NumberOfPlayersA = currentEntry.NumberOfPlayersA
+        let teamNameB = currentEntry.teamNameB
+        let NumberOfPlayersB = currentEntry.NumberOfPlayersB
+        let PlayerA1Name = currentEntry.PlayerA1Name
+        let PlayerA2Name = currentEntry.PlayerA2Name
+        let PlayerA3Name = currentEntry.PlayerA3Name
+        let PlayerA4Name = currentEntry.PlayerA4Name
+        let PlayerB1Name = currentEntry.PlayerB1Name
+        let PlayerB2Name = currentEntry.PlayerB2Name
+        let PlayerB3Name = currentEntry.PlayerB3Name
+        let PlayerB4Name = currentEntry.PlayerB4Name
+        if (currentEntry.TeamATotal !== null){
+            let TeamATotal = currentEntry.TeamATotal
+            dispatchGD({type: actionTypes.updateTotalA, payload:{id,competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,
+                NumberOfPlayersB,PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name,PlayerB1Name,PlayerB2Name,
+                PlayerB3Name,PlayerB4Name, TeamATotal,TeamBTotal}});
+        } else {
+            dispatchGD({type: actionTypes.updateTotalA, payload:{id,competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,
+                NumberOfPlayersB,PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name,PlayerB1Name,PlayerB2Name,
+                PlayerB3Name,PlayerB4Name, TeamBTotal}});
+        }
+        dispatchGD({type: actionTypes.saveGameDetails})
         if (callback) callback();
     };
 
-    const updateTotalB = (id, TeamBTotal,callback) => {
-        dispatchTB({type: actionTypes.updateTotalB, payload:{id, TeamBTotal}});
-        dispatchTB({type: actionTypes.saveGameDetails})
-        if (callback) callback();
-    };
 
     const createScores = (ScoreEnd1,callback) => {
         dispatchSE({type: actionTypes.createScores, payload:{ScoreEnd1}});
@@ -266,20 +240,15 @@ export const ItemProvider = ({children}) => {
     return (
         <ItemContext.Provider value={{
             GameDetailsState:gameDetailsState,
-            TeamATotalState: TeamATotalState,
-            TeamBTotalState: TeamBTotalState,
             ScoresState: ScoresState,
             ID,
             counter,
             counterB,
-            TeamATotal,
             End,
             create: createGame,
             createTeamA: createTeamA,
             createTeamB: createTeamB,
-            createTotalA: createTotalA,
             updateTotalA: updateTotalA,
-            createTotalB: createTotalB,
             updateTotalB: updateTotalB,
             createScores: createScores,
             updateScores: updateScores,

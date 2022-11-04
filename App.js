@@ -11,6 +11,7 @@ import ViewPlayersBScreen from './Source/Screens/ViewPlayersBScreen';
 import WhichTeamShot from './Source/Screens/WhichTeamShot';
 import TeamAShot from './Source/Screens/TeamAShot';
 import TeamBShot from './Source/Screens/TeamBShot';
+import ViewLoadedGames from './Source/Screens/ViewLoadedGames';
 
 const App = () => {
   const Stack = createNativeStackNavigator();  
@@ -67,6 +68,11 @@ const App = () => {
             name='TeamBShot'
             component = {TeamBShot}
             options = {{title:"Team B shot"}}
+          />
+          <Stack.Screen
+            name='ViewLoadedGames'
+            component = {ViewLoadedGames}
+            options = {{title:"Viewing Loaded Games"}}
           />
         </Stack.Navigator>
       </NavigationContainer>

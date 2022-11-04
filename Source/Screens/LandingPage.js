@@ -7,6 +7,7 @@ const LandingPage = ({navigation}) => {
       <Text>Welcome to Scorecard Tracker 9000</Text>
       <Text>Press the below button to begin tracking your score.</Text>
       <NavigationButton screenName="GameDetails" navigation={navigation}/>
+      <NavigationButton screenName="ViewLoadedGames" navigation={navigation}/>
     </View>
   );
 }

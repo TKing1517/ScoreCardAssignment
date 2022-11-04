@@ -3,10 +3,6 @@ import { actionTypes } from "../Helpers/actionTypes";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const GameDetails_KEY = "GameDetailsPassword";
-const PlayersA_KEY = "PlayersAPassword";
-const PlayersB_KEY = "PlayersBPassword";
-const TeamATotal_KEY = "TeamATotalPassword";
-const TeamBTotal_KEY = "TeamBTotalPassword";
 const Scores_KEY = "ScoresPassword";
 
 const ItemContext = react.createContext();
@@ -61,6 +57,29 @@ const gameDetailsReducer = (GameDetailsState,GameDetailsAction,TeamNamesAction) 
             } finally {
                 return GameDetailsState;
             }
+        case actionTypes.loadGameDetails:
+            return [
+                ...GameDetailsState, {
+                    id: GameDetailsAction.payload.id,
+                    competitonName: GameDetailsAction.payload.competitonName,
+                    date: new Date(GameDetailsAction.payload.date),
+                    rinkNumber: GameDetailsAction.payload.rinkNumber,
+                    teamNameA: GameDetailsAction.payload.teamNameA,
+                    NumberOfPlayersA: GameDetailsAction.payload.NumberOfPlayersA,
+                    teamNameB: GameDetailsAction.payload.teamNameB,
+                    NumberOfPlayersB: GameDetailsAction.payload.NumberOfPlayersB,
+                    PlayerA1Name: GameDetailsAction.payload.PlayerA1Name,
+                    PlayerA2Name: GameDetailsAction.payload.PlayerA2Name,
+                    PlayerA3Name: GameDetailsAction.payload.PlayerA3Name,
+                    PlayerA4Name: GameDetailsAction.payload.PlayerA4Name,
+                    PlayerB1Name: GameDetailsAction.payload.PlayerB1Name,
+                    PlayerB2Name: GameDetailsAction.payload.PlayerB2Name,
+                    PlayerB3Name: GameDetailsAction.payload.PlayerB3Name,
+                    PlayerB4Name: GameDetailsAction.payload.PlayerB4Name,
+                    TeamATotal: GameDetailsAction.payload.TeamATotal,
+                    TeamBTotal: GameDetailsAction.payload.TeamBTotal,
+                }
+            ]
         default:
             return GameDetailsState;
     };
@@ -110,6 +129,19 @@ export const ItemProvider = ({children}) => {
         dispatchGD({type: actionTypes.saveGameDetails})
      
     };
+    
+    useEffect(() => {
+        const loadGameDetails = async () => {
+            const storage = await AsyncStorage.getItem(GameDetails_KEY);
+            if (storage !== null && gameDetailsState.length === 0) {
+                initialItemState = JSON.parse(storage);
+                initialItemState.forEach(element => {
+                    dispatchGD({type: actionTypes.loadGameDetails, payload: element});
+                })
+            }
+        }
+        loadGameDetails();
+    },[GameDetails_KEY])
 
     const createTeamA = (id,PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name) => {
         const currentEntry = gameDetailsState.find((e) => e.id===ID);
@@ -255,6 +287,7 @@ export const ItemProvider = ({children}) => {
             incrementCounter: incrementCounter,
             incrementCounterB: incrementCounterB,
             incrementEnd: incrementEnd,
+            
             }}>
             {children}
         </ItemContext.Provider>

@@ -8,7 +8,7 @@ import WhichTeamShot from './WhichTeamShot';
 const TeamBShot = ({navigation}) => {
     const {TeamBTotalState,updateTotalB,createTotalB,ID,counterB,incrementCounterB,incrementEnd,createScores,updateScores,End,ScoresState,GameDetailsState} = useContext(ItemContext);
     
-    const [localTeamBTotal, setTeamBTotal] = useState(0);
+
     const [DifferentCounter, setDCounter] = useState(0);
     const found = ScoresState.find(obj => {
         return obj.id === ID;
@@ -16,12 +16,7 @@ const TeamBShot = ({navigation}) => {
 
     let CurrentEntry = GameDetailsState.find((e) => (e.id===ID));
     console.log({CurrentEntry})
-    if (CurrentEntry != null && DifferentCounter === 0){
-        if (CurrentEntry.TeamBTotal > 0){
-            setTeamBTotal(CurrentEntry.TeamBTotal);
-            setDCounter(1);
-        } 
-    }
+
    
     const [TeamBShot, setTeamBShot] = useState(0);
     const [localcounter, setCounter] = useState(counterB);
@@ -42,9 +37,7 @@ const TeamBShot = ({navigation}) => {
         />
         <Button title = "input shot" onPress ={() => {
             if (localcounter === 0 ){
-                setTeamBTotal(parseInt(TeamBShot));
-                
-                updateTotalB(ID,localTeamBTotal);
+                updateTotalB(ID,parseInt(TeamBShot));
                 setCounter(1);
                 console.log('yes');
                 let ScoretoStore = (parseInt(TeamBShot) + "B")
@@ -55,8 +48,8 @@ const TeamBShot = ({navigation}) => {
                 incrementEnd();
                 navigation.pop();
             } else {
-                setTeamBTotal(parseInt(localTeamBTotal) + parseInt(TeamBShot));
-                updateTotalB(ID,(parseInt(localTeamBTotal))) 
+ 
+                updateTotalB(ID,(parseInt(CurrentEntry.TeamBTotal)+parseInt(TeamBShot))) 
                 console.log('no'); 
 
                 incrementEnd();
@@ -197,7 +190,7 @@ const TeamBShot = ({navigation}) => {
 
             }}
         />
-        <Text>The current total is {localTeamBTotal}</Text>
+        <Text>The current total is {CurrentEntry.TeamBTotal}</Text>
         <FlatList
         data={GameDetailsState}
         keyExtractor={(e) => e.id.toString()}

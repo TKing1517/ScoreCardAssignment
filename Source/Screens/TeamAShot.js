@@ -8,7 +8,7 @@ import WhichTeamShot from './WhichTeamShot';
 const TeamAShot = ({navigation}) => {
     const {TeamATotalState,updateTotalA,createTotalA,ID,counter,incrementCounter,incrementEnd,createScores,updateScores,End,ScoresState,GameDetailsState} = useContext(ItemContext);
     
-    const [localTeamATotal, setTeamATotal] = useState(0);
+
     const [DifferentCounter, setDCounter] = useState(0);
     const found = ScoresState.find(obj => {
         return obj.id === ID;
@@ -16,13 +16,7 @@ const TeamAShot = ({navigation}) => {
     //console.log(ScoresState);
     let CurrentEntry = GameDetailsState.find((e) => (e.id===ID));
     console.log({CurrentEntry})
-    if (CurrentEntry != null && DifferentCounter === 0){
-        if (CurrentEntry.TeamATotal > 0){
-            setTeamATotal(CurrentEntry.TeamATotal);
-            setDCounter(1);
-        } 
-    }
-   
+
     const [TeamAShot, setTeamAShot] = useState(0);
     const [localcounter, setCounter] = useState(counter);
     incrementCounter();
@@ -42,12 +36,9 @@ const TeamAShot = ({navigation}) => {
         />
         
         <Button title = "input shot" onPress ={() => {
-            //Help here, why is the createTotalA not updating on time?
             if (localcounter === 0 ){
-                setTeamATotal(TeamAShot);
                 console.log(TeamAShot)
-                console.log(localTeamATotal);
-                updateTotalA(ID,localTeamATotal);
+                updateTotalA(ID,parseInt(TeamAShot));
                 setCounter(1);
                 console.log('yes');
                 let ScoretoStore = (parseInt(TeamAShot) + "A")
@@ -58,8 +49,8 @@ const TeamAShot = ({navigation}) => {
                 incrementEnd();
                 navigation.pop();
             } else {
-                setTeamATotal(parseInt(localTeamATotal) + parseInt(TeamAShot));
-                updateTotalA(ID,(parseInt(localTeamATotal))) 
+
+                updateTotalA(ID,(parseInt(CurrentEntry.TeamATotal) + parseInt(TeamAShot))) 
                 console.log('no'); 
                
                 incrementEnd();
@@ -203,7 +194,7 @@ const TeamAShot = ({navigation}) => {
 
             }}
         />
-        <Text>The current total is {localTeamATotal}</Text>
+        <Text>The current total is {CurrentEntry.TeamATotal}</Text>
         <FlatList
         data={GameDetailsState}
         keyExtractor={(e) => e.id.toString()}

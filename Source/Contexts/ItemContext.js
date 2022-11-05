@@ -8,19 +8,19 @@ const Scores_KEY = "ScoresPassword";
 const ItemContext = react.createContext();
 let gameDetails = [];
 
-let ID = Math.floor(Math.random()*999999);
+let ID;
 let counter = 0;
 let counterB = 0;
 let End = 1;
 let Scores = [];
-const gameDetailsReducer = (GameDetailsState,GameDetailsAction,TeamNamesAction) => {
+const gameDetailsReducer = (GameDetailsState,GameDetailsAction) => {
 
     switch(GameDetailsAction.type){
         case actionTypes.create:
             return [
                 ...GameDetailsState,
                 {
-                    id: ID,
+                    id: ID = Math.floor(Math.random()*999999),
                     competitonName: GameDetailsAction.payload.competitonName,
                     date: new Date().toUTCString(),
                     rinkNumber: GameDetailsAction.payload.rinkNumber,

@@ -1,11 +1,33 @@
 import React from "react";
-import { View,Text,Button } from "react-native";
+import { View,Text,StyleSheet,TextInput,Button,FlatList,Pressable} from 'react-native';
+import NavigationButton from "../Components/NavigationButton";
+import { useState, useContext } from "react";
 import ItemContext from "../Contexts/ItemContext";
-import { useContext } from "react";
+import { MaterialIcons } from '@expo/vector-icons';
 
 const ViewLoadedGames = ({navigation, route}) => {
+    const {GameDetailsState,deleteDetails} = useContext(ItemContext);
     return(
-        <Text></Text>
+        <View>
+        <FlatList
+            data={GameDetailsState}
+            keyExtractor={(e) => e.id.toString()}
+            renderItem={({item}) => {
+                return (
+                    
+                    <Pressable onPress={() => navigation.navigate('ViewGamesScreen',{
+                        id: item.id,
+                    })}>
+                    <><Text>{item.id}</Text></>
+                    <Pressable onPress={() => {deleteDetails(item.id)}}>
+                        <MaterialIcons name="delete" size={38} color="red" />
+                    </Pressable>
+                    </Pressable>
+                    
+                )
+            }}
+        />
+        </View>
     );
 };
 

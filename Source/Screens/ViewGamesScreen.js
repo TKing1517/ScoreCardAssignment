@@ -4,7 +4,7 @@ import ItemContext from "../Contexts/ItemContext";
 import { useContext } from "react";
 
 const ViewGamesScreen = ({navigation, route}) => {
-    const {id, competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,NumberOfPlayersB} = route.params;
+    const {id,date} = route.params;
     const{GameDetailsState} = useContext(ItemContext);
     const currentEntry = GameDetailsState.find((e) => e.id===id);
 
@@ -12,7 +12,7 @@ const ViewGamesScreen = ({navigation, route}) => {
         <View>
             <Text>ID: {id} </Text>
             <Text>competitonName: {currentEntry.competitonName} </Text>
-            <Text>date: {new Date(date).toLocaleDateString()}</Text>
+            <Text>date: {currentEntry.date}</Text>
             <Text>rinkNumber: {currentEntry.rinkNumber} </Text>
             <Text>teamNameA: {currentEntry.teamNameA} </Text>
             <Text>NumberOfPlayersA: {currentEntry.NumberOfPlayersA}</Text>

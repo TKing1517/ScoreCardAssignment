@@ -91,7 +91,7 @@ const GameDetails = ({navigation}) => {
                     <Pressable onPress={() => navigation.navigate('ViewGamesScreen',{
                         id: item.id,
                         competitonName: item.competitonName,
-                        date: item.date.toUTCString(),
+                        date: item.date,
                         rinkNumber: item.rinkNumber,
                         teamNameA: item.teamNameA,
                         NumberOfPlayersA: item.NumberOfPlayersA,

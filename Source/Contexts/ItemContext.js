@@ -22,7 +22,7 @@ const gameDetailsReducer = (GameDetailsState,GameDetailsAction,TeamNamesAction) 
                 {
                     id: ID,
                     competitonName: GameDetailsAction.payload.competitonName,
-                    date: new Date(),
+                    date: new Date().toUTCString(),
                     rinkNumber: GameDetailsAction.payload.rinkNumber,
                     teamNameA: GameDetailsAction.payload.teamNameA,
                     NumberOfPlayersA: GameDetailsAction.payload.NumberOfPlayersA,
@@ -57,12 +57,14 @@ const gameDetailsReducer = (GameDetailsState,GameDetailsAction,TeamNamesAction) 
             } finally {
                 return GameDetailsState;
             }
+        case actionTypes.delete:
+            return GameDetailsState.filter((e) => e.id !==GameDetailsAction.payload.id);
         case actionTypes.loadGameDetails:
             return [
                 ...GameDetailsState, {
                     id: GameDetailsAction.payload.id,
                     competitonName: GameDetailsAction.payload.competitonName,
-                    date: new Date(GameDetailsAction.payload.date),
+                    date: GameDetailsAction.payload.date,
                     rinkNumber: GameDetailsAction.payload.rinkNumber,
                     teamNameA: GameDetailsAction.payload.teamNameA,
                     NumberOfPlayersA: GameDetailsAction.payload.NumberOfPlayersA,
@@ -240,6 +242,12 @@ export const ItemProvider = ({children}) => {
         if (callback) callback();
     };
 
+    const deleteDetails= (id, callback) => {
+        dispatchGD({type:actionTypes.delete, payload: {id:id}});
+        dispatchGD({type:actionTypes.saveGameDetails});
+        if (callback) callback();
+    }
+
 
     const createScores = (ScoreEnd1,callback) => {
         dispatchSE({type: actionTypes.createScores, payload:{ScoreEnd1}});
@@ -287,6 +295,7 @@ export const ItemProvider = ({children}) => {
             incrementCounter: incrementCounter,
             incrementCounterB: incrementCounterB,
             incrementEnd: incrementEnd,
+            deleteDetails: deleteDetails,
             
             }}>
             {children}

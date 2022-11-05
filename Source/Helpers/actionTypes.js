@@ -5,4 +5,5 @@ export const actionTypes={
     saveGameDetails: 'Save',
     updateGameDetails: 'Update',
     loadGameDetails: 'Load',
+    delete: 'Delete',
 };

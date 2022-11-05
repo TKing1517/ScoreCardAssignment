@@ -80,6 +80,7 @@ const gameDetailsReducer = (GameDetailsState,GameDetailsAction,TeamNamesAction) 
                     PlayerB4Name: GameDetailsAction.payload.PlayerB4Name,
                     TeamATotal: GameDetailsAction.payload.TeamATotal,
                     TeamBTotal: GameDetailsAction.payload.TeamBTotal,
+                    
                 }
             ]
         default:
@@ -198,11 +199,11 @@ export const ItemProvider = ({children}) => {
         let PlayerB4Name = currentEntry.PlayerB4Name
         if (currentEntry.TeamBTotal !== null){
             let TeamBTotal = currentEntry.TeamBTotal
-            dispatchGD({type: actionTypes.updateTotalA, payload:{id,competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,
+            dispatchGD({type: actionTypes.updateGameDetails, payload:{id,competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,
                 NumberOfPlayersB,PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name,PlayerB1Name,PlayerB2Name,
                 PlayerB3Name,PlayerB4Name, TeamATotal,TeamBTotal}});
         } else {
-            dispatchGD({type: actionTypes.updateTotalA, payload:{id,competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,
+            dispatchGD({type: actionTypes.updateGameDetails, payload:{id,competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,
                 NumberOfPlayersB,PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name,PlayerB1Name,PlayerB2Name,
                 PlayerB3Name,PlayerB4Name, TeamATotal}});
         }
@@ -230,11 +231,11 @@ export const ItemProvider = ({children}) => {
         let PlayerB4Name = currentEntry.PlayerB4Name
         if (currentEntry.TeamATotal !== null){
             let TeamATotal = currentEntry.TeamATotal
-            dispatchGD({type: actionTypes.updateTotalA, payload:{id,competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,
+            dispatchGD({type: actionTypes.updateGameDetails, payload:{id,competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,
                 NumberOfPlayersB,PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name,PlayerB1Name,PlayerB2Name,
                 PlayerB3Name,PlayerB4Name, TeamATotal,TeamBTotal}});
         } else {
-            dispatchGD({type: actionTypes.updateTotalA, payload:{id,competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,
+            dispatchGD({type: actionTypes.updateGameDetails, payload:{id,competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,
                 NumberOfPlayersB,PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name,PlayerB1Name,PlayerB2Name,
                 PlayerB3Name,PlayerB4Name, TeamBTotal}});
         }

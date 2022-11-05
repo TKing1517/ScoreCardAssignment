@@ -13,7 +13,7 @@ const TeamAShot = ({navigation}) => {
     const found = ScoresState.find(obj => {
         return obj.id === ID;
     });
-    console.log(ScoresState);
+    //console.log(ScoresState);
     let CurrentEntry = GameDetailsState.find((e) => (e.id===ID));
     console.log({CurrentEntry})
     if (CurrentEntry != null && DifferentCounter === 0){
@@ -44,8 +44,9 @@ const TeamAShot = ({navigation}) => {
         <Button title = "input shot" onPress ={() => {
             //Help here, why is the createTotalA not updating on time?
             if (localcounter === 0 ){
-                setTeamATotal(parseInt(TeamAShot));
-                
+                setTeamATotal(TeamAShot);
+                console.log(TeamAShot)
+                console.log(localTeamATotal);
                 updateTotalA(ID,localTeamATotal);
                 setCounter(1);
                 console.log('yes');

@@ -22,6 +22,9 @@ const ViewLoadedGames = ({navigation, route}) => {
                     <Pressable onPress={() => {deleteDetails(item.id)}}>
                         <MaterialIcons name="delete" size={38} color="red" />
                     </Pressable>
+                    <Button title="Edit Item" onPress={() => {
+                        navigation.navigate('EditGameDetails',{id:item.id});
+                    }} />
                     </Pressable>
                     
                 )

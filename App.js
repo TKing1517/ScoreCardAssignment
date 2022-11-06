@@ -13,6 +13,7 @@ import TeamAShot from './Source/Screens/TeamAShot';
 import TeamBShot from './Source/Screens/TeamBShot';
 import ViewLoadedGames from './Source/Screens/ViewLoadedGames';
 import GameEnd from './Source/Screens/GameEnd';
+import EditGameDetails from './Source/Screens/EditGameDetails';
 
 const App = () => {
   const Stack = createNativeStackNavigator();  
@@ -78,6 +79,11 @@ const App = () => {
           <Stack.Screen
             name='GameEnd'
             component = {GameEnd}
+            options = {{title:"Game End"}}
+          />
+          <Stack.Screen
+            name='EditGameDetails'
+            component = {EditGameDetails}
             options = {{title:"Game End"}}
           />
         </Stack.Navigator>

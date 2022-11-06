@@ -18,6 +18,17 @@ const ViewGamesScreen = ({navigation, route}) => {
             <Text>NumberOfPlayersA: {currentEntry.NumberOfPlayersA}</Text>
             <Text>teamNameB: {currentEntry.teamNameB} </Text>
             <Text>NumberOfPlayersB: {currentEntry.NumberOfPlayersB} </Text>
+            <Text>PlayerA1Name: {currentEntry.PlayerA1Name} </Text>
+            <Text>PlayerA2Name: {currentEntry.PlayerA2Name} </Text>
+            <Text>PlayerA3Name: {currentEntry.PlayerA3Name}</Text>
+            <Text>PlayerA4Name: {currentEntry.PlayerA4Name} </Text>
+            <Text>PlayerB1Name: {currentEntry.PlayerB1Name} </Text>
+            <Text>PlayerB2Name: {currentEntry.PlayerB2Name} </Text>
+            <Text>PlayerB3Name: {currentEntry.PlayerB3Name} </Text>
+            <Text>PlayerB4Name: {currentEntry.PlayerB4Name} </Text>
+            <Text>TeamATotal: {currentEntry.TeamATotal} </Text>
+            <Text>TeamBTotal: {currentEntry.TeamBTotal} </Text>
+
         </View>
     );
 };

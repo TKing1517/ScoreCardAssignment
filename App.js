@@ -12,6 +12,7 @@ import WhichTeamShot from './Source/Screens/WhichTeamShot';
 import TeamAShot from './Source/Screens/TeamAShot';
 import TeamBShot from './Source/Screens/TeamBShot';
 import ViewLoadedGames from './Source/Screens/ViewLoadedGames';
+import GameEnd from './Source/Screens/GameEnd';
 
 const App = () => {
   const Stack = createNativeStackNavigator();  
@@ -73,6 +74,11 @@ const App = () => {
             name='ViewLoadedGames'
             component = {ViewLoadedGames}
             options = {{title:"Viewing Loaded Games"}}
+          />
+          <Stack.Screen
+            name='GameEnd'
+            component = {GameEnd}
+            options = {{title:"Game End"}}
           />
         </Stack.Navigator>
       </NavigationContainer>

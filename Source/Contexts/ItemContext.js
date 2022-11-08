@@ -278,6 +278,39 @@ export const ItemProvider = ({children}) => {
         End = End + 1;
         if (callback) callback();
     }
+
+    const resetValues =(callback) => {
+        End = 1;
+        counter=0;
+        counterB=0;
+        if (callback) callback();
+    }
+
+    const EditResults =(id,teamATotal,teamBTotal, callback) => {
+        const currentEntry = gameDetailsState.find((e) => e.id===id);
+        let competitonName = currentEntry.competitonName
+        let date = currentEntry.date
+        let rinkNumber = currentEntry.rinkNumber
+        let teamNameA = currentEntry.teamNameA
+        let NumberOfPlayersA = currentEntry.NumberOfPlayersA
+        let teamNameB = currentEntry.teamNameB
+        let NumberOfPlayersB = currentEntry.NumberOfPlayersB
+        let PlayerA1Name = currentEntry.PlayerA1Name
+        let PlayerA2Name = currentEntry.PlayerA2Name
+        let PlayerA3Name = currentEntry.PlayerA3Name
+        let PlayerA4Name = currentEntry.PlayerA4Name
+        let PlayerB1Name = currentEntry.PlayerB1Name
+        let PlayerB2Name = currentEntry.PlayerB2Name
+        let PlayerB3Name = currentEntry.PlayerB3Name
+        let PlayerB4Name = currentEntry.PlayerB4Name
+        let TeamATotal = teamATotal
+        let TeamBTotal =teamBTotal
+        dispatchGD({type: actionTypes.updateGameDetails, payload:{id,competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,
+            NumberOfPlayersB,PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name,PlayerB1Name,PlayerB2Name,
+            PlayerB3Name,PlayerB4Name,TeamATotal,TeamBTotal}});
+        dispatchGD({type: actionTypes.save});
+        if (callback) callback();
+    }
     return (
         <ItemContext.Provider value={{
             GameDetailsState:gameDetailsState,
@@ -297,7 +330,8 @@ export const ItemProvider = ({children}) => {
             incrementCounterB: incrementCounterB,
             incrementEnd: incrementEnd,
             deleteDetails: deleteDetails,
-            
+            EditResults: EditResults,
+            resetValues:resetValues,
             }}>
             {children}
         </ItemContext.Provider>

@@ -6,7 +6,7 @@ import ItemContext from "../Contexts/ItemContext";
 import { MaterialIcons } from '@expo/vector-icons';
 
 const ViewLoadedGames = ({navigation, route}) => {
-    const {GameDetailsState,deleteDetails} = useContext(ItemContext);
+    const {GameDetailsState,deleteDetails,ID} = useContext(ItemContext);
     return(
         <View>
         <FlatList
@@ -23,9 +23,10 @@ const ViewLoadedGames = ({navigation, route}) => {
                         <MaterialIcons name="delete" size={38} color="red" />
                     </Pressable>
                     <Button title="Edit Item" onPress={() => {
-                        navigation.navigate('EditGameDetails',{id:item.id});
+                        navigation.navigate('EditGameDetails',{Id:item.id});
                     }} />
                     </Pressable>
+                    
                     
                 )
             }}

@@ -137,8 +137,8 @@ export const ItemProvider = ({children}) => {
         const loadGameDetails = async () => {
             const storage = await AsyncStorage.getItem(GameDetails_KEY);
             if (storage !== null && gameDetailsState.length === 0) {
-                initialItemState = JSON.parse(storage);
-                initialItemState.forEach(element => {
+                gameDetails = JSON.parse(storage);
+                gameDetails.forEach(element => {
                     dispatchGD({type: actionTypes.loadGameDetails, payload: element});
                 })
             }

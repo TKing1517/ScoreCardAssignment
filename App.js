@@ -84,7 +84,7 @@ const App = () => {
           <Stack.Screen
             name='EditGameDetails'
             component = {EditGameDetails}
-            options = {{title:"Game End"}}
+            options = {{title:"Edit game details"}}
           />
         </Stack.Navigator>
       </NavigationContainer>

@@ -28,6 +28,7 @@ const ViewGamesScreen = ({navigation, route}) => {
             <Text>PlayerB4Name: {currentEntry.PlayerB4Name} </Text>
             <Text>TeamATotal: {currentEntry.TeamATotal} </Text>
             <Text>TeamBTotal: {currentEntry.TeamBTotal} </Text>
+            <Text>Game Scores: {currentEntry.Scores} </Text>
 
         </View>
     );

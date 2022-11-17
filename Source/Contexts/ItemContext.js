@@ -12,6 +12,8 @@ let ID;
 let counter = 0;
 let counterB = 0;
 let End = 1;
+let PhotoA;
+let PhotoB;
 
 const gameDetailsReducer = (GameDetailsState,GameDetailsAction) => {
 
@@ -230,6 +232,31 @@ export const ItemProvider = ({children}) => {
         if (callback) callback();
     }
 
+    const NewPhotoA =(NewURI,callback) => {
+        console.log(NewURI)
+        PhotoA = NewURI;
+        console.log("soemthing A: " + PhotoA)
+        if (callback) callback();
+    }
+
+    const GetPhotoA = () => {
+        return(
+            PhotoA
+        )
+    }
+
+    const NewPhotoB =(NewURI,callback) => {
+        PhotoB = NewURI
+        console.log("soemthing B: " + PhotoB)
+        if (callback) callback();
+    }
+
+    const GetPhotoB = () => {
+        return(
+            PhotoB
+        )
+    }
+
     const resetValues =(callback) => {
         End = 1;
         counter=0;
@@ -272,6 +299,8 @@ export const ItemProvider = ({children}) => {
             counter,
             counterB,
             End,
+            PhotoA,
+            PhotoB,
             create: createGame,
             createTeamA: createTeamA,
             createTeamB: createTeamB,
@@ -283,6 +312,10 @@ export const ItemProvider = ({children}) => {
             deleteDetails: deleteDetails,
             EditResults: EditResults,
             resetValues:resetValues,
+            NewPhotoA:NewPhotoA,
+            NewPhotoB:NewPhotoB,
+            GetPhotoA:GetPhotoA,
+            GetPhotoB:GetPhotoB,
             }}>
             {children}
         </ItemContext.Provider>

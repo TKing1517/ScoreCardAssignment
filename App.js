@@ -14,6 +14,12 @@ import TeamBShot from './Source/Screens/TeamBShot';
 import ViewLoadedGames from './Source/Screens/ViewLoadedGames';
 import GameEnd from './Source/Screens/GameEnd';
 import EditGameDetails from './Source/Screens/EditGameDetails';
+import TakingPhotoA from './Source/Screens/TakingPhotoA';
+import WantPhotoA from './Source/Screens/WantPhotoA';
+import TakenPicA from './Source/Screens/TakenPicA';
+import TakingPhotoB from './Source/Screens/TakingPhotosB';
+import TakenPicB from './Source/Screens/TakenPicB';
+
 
 const App = () => {
   const Stack = createNativeStackNavigator();  
@@ -85,6 +91,31 @@ const App = () => {
             name='EditGameDetails'
             component = {EditGameDetails}
             options = {{title:"Edit game details"}}
+          />
+          <Stack.Screen
+            name='WantPhotoA'
+            component = {WantPhotoA}
+            options = {{title:"Photo A"}}
+          />
+          <Stack.Screen
+            name='TakingPhotoA'
+            component = {TakingPhotoA}
+            options = {{title:"Taking Photo A"}}
+          />
+          <Stack.Screen
+            name='TakenPicA'
+            component = {TakenPicA}
+            options = {{title:"Taken Pic A"}}
+          />
+          <Stack.Screen
+            name='TakingPhotoB'
+            component = {TakingPhotoB}
+            options = {{title:"Taking Photo B"}}
+          />
+          <Stack.Screen
+            name='TakenPicB'
+            component = {TakenPicB}
+            options = {{title:"Taken Pic B"}}
           />
         </Stack.Navigator>
       </NavigationContainer>

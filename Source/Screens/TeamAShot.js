@@ -6,14 +6,12 @@ import WhichTeamShot from './WhichTeamShot';
 
 
 const TeamAShot = ({navigation}) => {
-    const {updateTotalA,ID,counter,incrementCounter,incrementEnd,End,ScoresState,GameDetailsState} = useContext(ItemContext);
+    const {updateTotalA,ID,counter,incrementCounter,incrementEnd,End,GameDetailsState} = useContext(ItemContext);
     var tempScoreArray = []
 
     const [DifferentCounter, setDCounter] = useState(0);
-    const found = ScoresState.find(obj => {
-        return obj.id === ID;
-    });
-    //console.log(ScoresState);
+
+
     let CurrentEntry = GameDetailsState.find((e) => (e.id===ID));
     console.log({CurrentEntry})
     if (CurrentEntry.Scores != null || CurrentEntry.Scores != undefined){

@@ -51,7 +51,7 @@ const PlayerNamesB = ({navigation, route}) => {
             />
 
             <Button title = "submit items" onPress ={() => {
-               createTeamB(ID,PlayerB1Name,PlayerB2Name,PlayerB3Name,PlayerB4Name),navigation.navigate('WhichTeamShot');
+               createTeamB(ID,PlayerB1Name,PlayerB2Name,PlayerB3Name,PlayerB4Name),navigation.navigate('WantPhotoA');
             }}
             />
             <NavigationButton screenName="ViewPlayersBScreen" navigation={navigation}/>

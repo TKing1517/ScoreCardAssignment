@@ -7,8 +7,9 @@ const WantPhotoA = ({navigation,route}) => {
     
     return(
         <View>
-            <Text>Do you want to take a photo for team A?</Text>
+            <Text>Do you want to take team Photos?</Text>
             <Button title = "Take Team A Photo"  onPress ={() => {navigation.navigate('TakingPhotoA')} }/>
+            <Button title = "No photos" onPress={() => {navigation.navigate('WhichTeamShot')}}/>
         </View>
         
     )

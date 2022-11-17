@@ -95,7 +95,7 @@ const App = () => {
           <Stack.Screen
             name='WantPhotoA'
             component = {WantPhotoA}
-            options = {{title:"Photo A"}}
+            options = {{title:"Take Photos?"}}
           />
           <Stack.Screen
             name='TakingPhotoA'

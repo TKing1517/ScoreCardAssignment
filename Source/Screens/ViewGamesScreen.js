@@ -1,5 +1,5 @@
 import React from "react";
-import { View,Text,Button } from "react-native";
+import { View,Text,Button,Image,StyleSheet } from "react-native";
 import ItemContext from "../Contexts/ItemContext";
 import { useContext } from "react";
 
@@ -8,6 +8,9 @@ const ViewGamesScreen = ({navigation, route}) => {
     const{GameDetailsState} = useContext(ItemContext);
     const currentEntry = GameDetailsState.find((e) => e.id===id);
 
+    console.log(currentEntry.StoredPhotoA);
+    console.log(currentEntry.StoredPhotoB);
+
     return(
         <View>
             <Text>ID: {id} </Text>
@@ -15,8 +18,10 @@ const ViewGamesScreen = ({navigation, route}) => {
             <Text>date: {currentEntry.date}</Text>
             <Text>rinkNumber: {currentEntry.rinkNumber} </Text>
             <Text>teamNameA: {currentEntry.teamNameA} </Text>
+            {currentEntry.StoredPhotoA != null? <Image style={styles.imageStyle} source={{uri:currentEntry.StoredPhotoA}}/>: <Text>There is no photo.</Text> }
             <Text>NumberOfPlayersA: {currentEntry.NumberOfPlayersA}</Text>
             <Text>teamNameB: {currentEntry.teamNameB} </Text>
+            {currentEntry.StoredPhotoB != null? <Image style={styles.imageStyle} source={{uri:currentEntry.StoredPhotoB}}/>: <Text>There is no photo.</Text> }
             <Text>NumberOfPlayersB: {currentEntry.NumberOfPlayersB} </Text>
             <Text>PlayerA1Name: {currentEntry.PlayerA1Name} </Text>
             <Text>PlayerA2Name: {currentEntry.PlayerA2Name} </Text>
@@ -33,5 +38,19 @@ const ViewGamesScreen = ({navigation, route}) => {
         </View>
     );
 };
+const styles = StyleSheet.create({
+    container:{
+        flex:1
+    },
+    imageStyle:{
+        maxWidth:1000,
+        maxHeight:1000,
+        height: 100,
+        aspectRatio:1, 
+
+        //float: 'left',
+    }
+})
+
 
 export default ViewGamesScreen;

@@ -38,9 +38,11 @@ const gameDetailsReducer = (GameDetailsState,GameDetailsAction) => {
                     PlayerB2Name: GameDetailsAction.payload.PlayerB2Name,
                     PlayerB3Name: GameDetailsAction.payload.PlayerB3Name,
                     PlayerB4Name: GameDetailsAction.payload.PlayerB4Name,
+                    StoredPhotoA: GameDetailsAction.payload.StoredPhotoA,
+                    StoredPhotoB: GameDetailsAction.payload.StoredPhotoB,
                     TeamATotal: GameDetailsAction.payload.TeamATotal,
                     TeamBTotal: GameDetailsAction.payload.TeamBTotal,
-                    Scores: []
+                    Scores: [],
                 }
         ];
         case actionTypes.updateGameDetails:
@@ -80,6 +82,8 @@ const gameDetailsReducer = (GameDetailsState,GameDetailsAction) => {
                     PlayerB2Name: GameDetailsAction.payload.PlayerB2Name,
                     PlayerB3Name: GameDetailsAction.payload.PlayerB3Name,
                     PlayerB4Name: GameDetailsAction.payload.PlayerB4Name,
+                    StoredPhotoA: GameDetailsAction.payload.StoredPhotoA,
+                    StoredPhotoB: GameDetailsAction.payload.StoredPhotoB,
                     TeamATotal: GameDetailsAction.payload.TeamATotal,
                     TeamBTotal: GameDetailsAction.payload.TeamBTotal,
                     Scores: GameDetailsAction.payload.Scores,
@@ -167,15 +171,19 @@ export const ItemProvider = ({children}) => {
         let PlayerB2Name = currentEntry.PlayerB2Name
         let PlayerB3Name = currentEntry.PlayerB3Name
         let PlayerB4Name = currentEntry.PlayerB4Name
+        let StoredPhotoA = currentEntry.StoredPhotoA
+        let StoredPhotoB = currentEntry.StoredPhotoB
+        //console.log(currentEntry.PhotoA)
+        //console.log(currentEntry.PhotoB)
         if (currentEntry.TeamBTotal !== null){
             let TeamBTotal = currentEntry.TeamBTotal
             dispatchGD({type: actionTypes.updateGameDetails, payload:{id,competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,
                 NumberOfPlayersB,PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name,PlayerB1Name,PlayerB2Name,
-                PlayerB3Name,PlayerB4Name, TeamATotal,TeamBTotal,Scores}});
+                PlayerB3Name,PlayerB4Name,StoredPhotoA,StoredPhotoB, TeamATotal,TeamBTotal,Scores}});
         } else {
             dispatchGD({type: actionTypes.updateGameDetails, payload:{id,competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,
                 NumberOfPlayersB,PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name,PlayerB1Name,PlayerB2Name,
-                PlayerB3Name,PlayerB4Name, TeamATotal,Scores}});
+                PlayerB3Name,PlayerB4Name,StoredPhotoA,StoredPhotoB, TeamATotal,Scores}});
         }
         
         dispatchGD({type: actionTypes.saveGameDetails})
@@ -199,15 +207,17 @@ export const ItemProvider = ({children}) => {
         let PlayerB2Name = currentEntry.PlayerB2Name
         let PlayerB3Name = currentEntry.PlayerB3Name
         let PlayerB4Name = currentEntry.PlayerB4Name
+        let StoredPhotoA = currentEntry.StoredPhotoA
+        let StoredPhotoB = currentEntry.StoredPhotoB
         if (currentEntry.TeamATotal !== null){
             let TeamATotal = currentEntry.TeamATotal
             dispatchGD({type: actionTypes.updateGameDetails, payload:{id,competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,
                 NumberOfPlayersB,PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name,PlayerB1Name,PlayerB2Name,
-                PlayerB3Name,PlayerB4Name, TeamATotal,TeamBTotal,Scores}});
+                PlayerB3Name,PlayerB4Name,StoredPhotoA,StoredPhotoB, TeamATotal,TeamBTotal,Scores}});
         } else {
             dispatchGD({type: actionTypes.updateGameDetails, payload:{id,competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,
                 NumberOfPlayersB,PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name,PlayerB1Name,PlayerB2Name,
-                PlayerB3Name,PlayerB4Name, TeamBTotal,Scores}});
+                PlayerB3Name,PlayerB4Name,StoredPhotoA,StoredPhotoB, TeamBTotal,Scores}});
         }
         dispatchGD({type: actionTypes.saveGameDetails})
         if (callback) callback();
@@ -233,9 +243,7 @@ export const ItemProvider = ({children}) => {
     }
 
     const NewPhotoA =(NewURI,callback) => {
-        console.log(NewURI)
         PhotoA = NewURI;
-        console.log("soemthing A: " + PhotoA)
         if (callback) callback();
     }
 
@@ -247,7 +255,7 @@ export const ItemProvider = ({children}) => {
 
     const NewPhotoB =(NewURI,callback) => {
         PhotoB = NewURI
-        console.log("soemthing B: " + PhotoB)
+        updatePhotos(ID);
         if (callback) callback();
     }
 
@@ -256,6 +264,36 @@ export const ItemProvider = ({children}) => {
             PhotoB
         )
     }
+
+    const updatePhotos = (id, callback) => {
+        const currentEntry = gameDetailsState.find((e) => e.id===ID);
+        let competitonName = currentEntry.competitonName
+        let date = currentEntry.date
+        let rinkNumber = currentEntry.rinkNumber
+        let teamNameA = currentEntry.teamNameA
+        let NumberOfPlayersA = currentEntry.NumberOfPlayersA
+        let teamNameB = currentEntry.teamNameB
+        let NumberOfPlayersB = currentEntry.NumberOfPlayersB
+        let PlayerA1Name = currentEntry.PlayerA1Name
+        let PlayerA2Name = currentEntry.PlayerA2Name
+        let PlayerA3Name = currentEntry.PlayerA3Name
+        let PlayerA4Name = currentEntry.PlayerA4Name
+        let PlayerB1Name = currentEntry.PlayerB1Name
+        let PlayerB2Name = currentEntry.PlayerB2Name
+        let PlayerB3Name = currentEntry.PlayerB3Name
+        let PlayerB4Name = currentEntry.PlayerB4Name
+        let StoredPhotoA=GetPhotoA()
+        console.log(StoredPhotoA);
+        let StoredPhotoB=GetPhotoB()
+        console.log(StoredPhotoB)
+        dispatchGD({type: actionTypes.updateGameDetails, payload:{id,competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,
+            NumberOfPlayersB,PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name,PlayerB1Name,PlayerB2Name,
+            PlayerB3Name,PlayerB4Name,StoredPhotoA,StoredPhotoB}});
+        dispatchGD({type: actionTypes.saveGameDetails})
+        //console.log(GetPhotoA())
+        //console.log(GetPhotoB())
+        if (callback) callback();
+    };
 
     const resetValues =(callback) => {
         End = 1;
@@ -281,12 +319,14 @@ export const ItemProvider = ({children}) => {
         let PlayerB2Name = currentEntry.PlayerB2Name
         let PlayerB3Name = currentEntry.PlayerB3Name
         let PlayerB4Name = currentEntry.PlayerB4Name
+        let StoredPhotoA = currentEntry.StoredPhotoA
+        let StoredPhotoB = currentEntry.StoredPhotoA
         let TeamATotal = teamATotal
         let TeamBTotal =teamBTotal
         let Scores = currentEntry.Scores
         dispatchGD({type: actionTypes.updateGameDetails, payload:{id,competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,
             NumberOfPlayersB,PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name,PlayerB1Name,PlayerB2Name,
-            PlayerB3Name,PlayerB4Name,TeamATotal,TeamBTotal,Scores}});
+            PlayerB3Name,PlayerB4Name,StoredPhotoA,StoredPhotoB,TeamATotal,TeamBTotal,Scores}});
         dispatchGD({type: actionTypes.save});
         if (callback) callback();
     }

@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     imageStyle:{
         maxWidth:1000,
         maxHeight:1000,
-        height: 550, 
+        aspectRatio:1,
         resizeMode: 'contain'
     }
 })

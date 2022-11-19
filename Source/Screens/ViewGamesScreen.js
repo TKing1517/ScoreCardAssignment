@@ -19,10 +19,9 @@ const ViewGamesScreen = ({navigation, route}) => {
             <Text>rinkNumber: {currentEntry.rinkNumber} </Text>
             <Text>teamNameA: {currentEntry.teamNameA} </Text>
             {currentEntry.StoredPhotoA != null? <Image style={styles.imageStyle} source={{uri:currentEntry.StoredPhotoA}}/>: <Text>There is no photo.</Text> }
-            <Text>NumberOfPlayersA: {currentEntry.NumberOfPlayersA}</Text>
+            <Text>NumberOfPlayers: {currentEntry.NumberOfPlayers}</Text>
             <Text>teamNameB: {currentEntry.teamNameB} </Text>
             {currentEntry.StoredPhotoB != null? <Image style={styles.imageStyle} source={{uri:currentEntry.StoredPhotoB}}/>: <Text>There is no photo.</Text> }
-            <Text>NumberOfPlayersB: {currentEntry.NumberOfPlayersB} </Text>
             <Text>PlayerA1Name: {currentEntry.PlayerA1Name} </Text>
             <Text>PlayerA2Name: {currentEntry.PlayerA2Name} </Text>
             <Text>PlayerA3Name: {currentEntry.PlayerA3Name}</Text>

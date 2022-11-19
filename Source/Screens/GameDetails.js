@@ -11,9 +11,8 @@ const GameDetails = ({navigation}) => {
     const [rinkNumber, setRinkNumber] = useState("");
     const [date, setDate] = useState("");
     const [teamNameA, setTeamNameA] = useState("");
-    const [NumberOfPlayersA, setNumberOfPlayersA] = useState("");
+    const [NumberOfPlayers, setNumberOfPlayers] = useState("");
     const [teamNameB, setTeamNameB] = useState("");
-    const [NumberOfPlayersB, setNumberOfPlayersB] = useState("");
   return (
     <View >
       <Text style={styles.textLabel}>Competition Name:</Text>
@@ -46,16 +45,6 @@ const GameDetails = ({navigation}) => {
             numberOfLines={1}
             maxLength={20}
             />
-        <Text style={styles.textLabel}>Number of players in team A:</Text>
-            <TextInput style={styles.textInput} 
-            keyboardType = 'numeric'
-            placeholder="Type number here"
-            value={NumberOfPlayersA}
-            onChangeText={(text) => {setNumberOfPlayersA(text);}}
-            multiline={false}
-            numberOfLines={1}
-            maxLength={1}
-            />
 
         <Text style={styles.textLabel}>Team Name B:</Text>
             <TextInput style={styles.textInput} 
@@ -66,19 +55,21 @@ const GameDetails = ({navigation}) => {
             numberOfLines={1}
             maxLength={20}
             />    
-        <Text style={styles.textLabel}>Number of players in team B:</Text>
+
+        <Text style={styles.textLabel}>Number of players in each team</Text>
             <TextInput style={styles.textInput} 
             keyboardType = 'numeric'
             placeholder="Type number here"
-            value={NumberOfPlayersB}
-            onChangeText={(text) => {setNumberOfPlayersB(text);}}
+            value={NumberOfPlayers}
+            onChangeText={(text) => {setNumberOfPlayers(text);}}
             multiline={false}
             numberOfLines={1}
             maxLength={1}
-            /> 
+        />
+
          
         <Button title = "submit items" onPress ={() => {
-               create(competitonName,date,rinkNumber,teamNameA,NumberOfPlayersA,teamNameB,NumberOfPlayersB), navigation.navigate('PlayerNamesA');
+               create(competitonName,date,rinkNumber,teamNameA,NumberOfPlayers,teamNameB), navigation.navigate('PlayerNamesA');
             }}
         />
         
@@ -94,9 +85,8 @@ const GameDetails = ({navigation}) => {
                         date: item.date,
                         rinkNumber: item.rinkNumber,
                         teamNameA: item.teamNameA,
-                        NumberOfPlayersA: item.NumberOfPlayersA,
+                        NumberOfPlayers: item.NumberOfPlayers,
                         teamNameB: item.teamNameB,
-                        NumberOfPlayersB: item.NumberOfPlayersB
                     })}>
                     <><Text>{item.id}</Text></>
                     </Pressable>

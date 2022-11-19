@@ -297,14 +297,14 @@ export const ItemProvider = ({children}) => {
         if (callback) callback();
     }
 
-    const EditResults =(id,teamATotal,teamBTotal, callback) => {
+    const EditResults =(id,competitonName,rinkNumber,teamNameA,NumberOfPlayers,teamNameB,teamATotal,teamBTotal, callback) => {
         const currentEntry = gameDetailsState.find((e) => e.id===id);
-        let competitonName = currentEntry.competitonName
+
         let date = currentEntry.date
-        let rinkNumber = currentEntry.rinkNumber
-        let teamNameA = currentEntry.teamNameA
-        let NumberOfPlayers = currentEntry.NumberOfPlayers
-        let teamNameB = currentEntry.teamNameB
+
+
+
+
         let PlayerA1Name = currentEntry.PlayerA1Name
         let PlayerA2Name = currentEntry.PlayerA2Name
         let PlayerA3Name = currentEntry.PlayerA3Name

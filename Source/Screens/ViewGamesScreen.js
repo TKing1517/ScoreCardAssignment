@@ -13,7 +13,8 @@ const ViewGamesScreen = ({navigation, route}) => {
     console.log(currentEntry.StoredPhotoA);
     console.log(currentEntry.StoredPhotoB);
 
-    currentEntry.Scores.forEach(
+    if (currentEntry.Scores != null){
+        currentEntry.Scores.forEach(
         function(d){
             if (d.charAt(1) === "A"){
                 scores = "Team A scored: " + d.charAt(0);
@@ -23,26 +24,27 @@ const ViewGamesScreen = ({navigation, route}) => {
             tempArrayOfScores.push(scores);
         }
       )
-
+    }
+    
     return(
         <View>
             <Text>ID: {id} </Text>
             <Text>competitonName: {currentEntry.competitonName} </Text>
             <Text>date: {currentEntry.date}</Text>
             <Text>rinkNumber: {currentEntry.rinkNumber} </Text>
+            <Text>NumberOfPlayers: {currentEntry.NumberOfPlayers}</Text>
             <Text>teamNameA: {currentEntry.teamNameA} </Text>
             {currentEntry.StoredPhotoA != null? <Image style={styles.imageStyle} source={{uri:currentEntry.StoredPhotoA}}/>: <Text>There is no photo.</Text> }
-            <Text>NumberOfPlayers: {currentEntry.NumberOfPlayers}</Text>
             <Text>teamNameB: {currentEntry.teamNameB} </Text>
             {currentEntry.StoredPhotoB != null? <Image style={styles.imageStyle} source={{uri:currentEntry.StoredPhotoB}}/>: <Text>There is no photo.</Text> }
             <Text>PlayerA1Name: {currentEntry.PlayerA1Name} </Text>
-            <Text>PlayerA2Name: {currentEntry.PlayerA2Name} </Text>
-            <Text>PlayerA3Name: {currentEntry.PlayerA3Name}</Text>
-            <Text>PlayerA4Name: {currentEntry.PlayerA4Name} </Text>
+            {currentEntry.PlayerA2Name != ""? <Text>PlayerA2Name: {currentEntry.PlayerA2Name}</Text>: null }
+            {currentEntry.PlayerA3Name != ""? <Text>PlayerA3Name: {currentEntry.PlayerA3Name}</Text>: null }
+            {currentEntry.PlayerA4Name != ""? <Text>PlayerA4Name: {currentEntry.PlayerA4Name}</Text>: null }
             <Text>PlayerB1Name: {currentEntry.PlayerB1Name} </Text>
-            <Text>PlayerB2Name: {currentEntry.PlayerB2Name} </Text>
-            <Text>PlayerB3Name: {currentEntry.PlayerB3Name} </Text>
-            <Text>PlayerB4Name: {currentEntry.PlayerB4Name} </Text>
+            {currentEntry.PlayerB2Name != ""? <Text>PlayerB2Name: {currentEntry.PlayerB2Name}</Text>: null }
+            {currentEntry.PlayerB3Name != ""? <Text>PlayerB3Name: {currentEntry.PlayerB3Name}</Text>: null }
+            {currentEntry.PlayerB4Name != ""? <Text>PlayerB4Name: {currentEntry.PlayerB4Name}</Text>: null }
             <Text>TeamATotal: {currentEntry.TeamATotal} </Text>
             <Text>TeamBTotal: {currentEntry.TeamBTotal} </Text>
             <Text>Game Scores: {tempArrayOfScores + ","} </Text>

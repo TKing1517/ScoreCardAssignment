@@ -18,7 +18,7 @@ import TakenPicA from './Source/Screens/TakenPicA';
 import TakingPhotoB from './Source/Screens/TakingPhotosB';
 import TakenPicB from './Source/Screens/TakenPicB';
 
-
+//Created by K2054427
 const App = () => {
   const Stack = createNativeStackNavigator();  
   return (

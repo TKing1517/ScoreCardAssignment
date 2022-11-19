@@ -1,5 +1,5 @@
 import React from "react";
-import { View,Text,StyleSheet,TextInput,Button,FlatList,Pressable } from "react-native";
+import { View,Text,StyleSheet,TextInput,Button,FlatList,Pressable,Alert } from "react-native";
 import { useState, useContext } from "react";
 import ItemContext from "../Contexts/ItemContext";
 import NavigationButton from "../Components/NavigationButton";
@@ -7,11 +7,26 @@ import NavigationButton from "../Components/NavigationButton";
 const PlayerNamesA = ({navigation, route}) => {
     const {GameDetailsState,createTeamA,ID} = useContext(ItemContext);
     let CurrentEntry = GameDetailsState.find((e) => (e.id===ID));
-    
+    var validation = false;
     const [PlayerA1Name, setPlayerA1Name] = useState("");
     const [PlayerA2Name, setPlayerA2Name] = useState("");
     const [PlayerA3Name, setPlayerA3Name] = useState("");
     const [PlayerA4Name, setPlayerA4Name] = useState("");
+
+    const onSubmit = () => {
+        if (PlayerA1Name.trim().length < 1 || parseInt(CurrentEntry.NumberOfPlayers) >= 2 && PlayerA2Name.trim().length < 1
+        || parseInt(CurrentEntry.NumberOfPlayers) >= 3 && PlayerA3Name.trim().length < 1 || parseInt(CurrentEntry.NumberOfPlayers) >= 4 && PlayerA4Name.trim().length < 1)
+        {
+            Alert.alert('Alert', 'All fields must be filled.');
+            return;
+        } else {
+            
+            validation = true;  
+            
+        }
+        
+    }
+
     return(
         <View>
             
@@ -56,7 +71,10 @@ const PlayerNamesA = ({navigation, route}) => {
 
  
             <Button title = "submit items" onPress ={() => {
-               createTeamA(ID,PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name), navigation.navigate('PlayerNamesB');
+                onSubmit()
+                if (validation === true ){
+                    createTeamA(ID,PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name), navigation.navigate('PlayerNamesB');
+                }
             }}
             />
             <NavigationButton screenName="ViewPlayersAScreen" navigation={navigation}/>

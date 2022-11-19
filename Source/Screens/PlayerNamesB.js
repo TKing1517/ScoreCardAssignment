@@ -1,5 +1,5 @@
 import React from "react";
-import { View,Text,StyleSheet,TextInput,Button,FlatList,Pressable } from "react-native";
+import { View,Text,StyleSheet,TextInput,Button,FlatList,Pressable,Alert } from "react-native";
 import { useState, useContext } from "react";
 import ItemContext from "../Contexts/ItemContext";
 import NavigationButton from "../Components/NavigationButton";
@@ -7,12 +7,27 @@ import NavigationButton from "../Components/NavigationButton";
 const PlayerNamesB = ({navigation, route}) => {
     const {GameDetailsState,createTeamB,ID} = useContext(ItemContext);
     let CurrentEntry = GameDetailsState.find((e) => (e.id===ID));
-
+    var validation = false;
 
     const [PlayerB1Name, setPlayerB1Name] = useState("");
     const [PlayerB2Name, setPlayerB2Name] = useState("");
     const [PlayerB3Name, setPlayerB3Name] = useState("");
     const [PlayerB4Name, setPlayerB4Name] = useState("");
+
+    const onSubmit = () => {
+        if (PlayerB1Name.trim().length < 1 || parseInt(CurrentEntry.NumberOfPlayers) >= 2 && PlayerB2Name.trim().length < 1
+        || parseInt(CurrentEntry.NumberOfPlayers) >= 3 && PlayerB3Name.trim().length < 1 || parseInt(CurrentEntry.NumberOfPlayers) >= 4 && PlayerB4Name.trim().length < 1)
+        {
+            Alert.alert('Alert', 'All fields must be filled.');
+            return;
+        } else {
+            
+            validation = true;  
+            
+        }
+        
+    }
+
     return(
         <View>
             <Text style={styles.textLabel}>Player 1 Of Team B</Text>
@@ -55,7 +70,11 @@ const PlayerNamesB = ({navigation, route}) => {
                                                                 />: null }
 
             <Button title = "submit items" onPress ={() => {
-               createTeamB(ID,PlayerB1Name,PlayerB2Name,PlayerB3Name,PlayerB4Name),navigation.navigate('WantPhotoA');
+                onSubmit()
+                if (validation === true ){
+                    createTeamB(ID,PlayerB1Name,PlayerB2Name,PlayerB3Name,PlayerB4Name),navigation.navigate('WantPhotoA');
+                }
+                
             }}
             />
             <NavigationButton screenName="ViewPlayersBScreen" navigation={navigation}/>

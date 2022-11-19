@@ -1,4 +1,4 @@
-import {  Text, View,Button } from 'react-native';
+import {  Text, View,Button,Alert } from 'react-native';
 import { useState, useContext } from "react";
 import NavigationButton from '../Components/NavigationButton';
 import ItemContext from '../Contexts/ItemContext';
@@ -25,7 +25,12 @@ const WhichTeamShot = ({navigation}) => {
   }
 
   const forceEnd =() => {
-    navigation.navigate('GameEnd');
+    if (CurrentTotalA > 0 && CurrentTotalB > 0){
+      navigation.navigate('GameEnd');
+    } else {
+        Alert.alert('Alert', 'At least input 1 value for each team before doing that!');
+        return;
+    }
   }
 
   return (

@@ -8,16 +8,19 @@ const GameDetails = ({navigation}) => {
     const {GameDetailsState,create} = useContext(ItemContext);
 
     const [competitonName, setcompetitionName] = useState("");
-    const [rinkNumber, setRinkNumber] = useState("");
+    const [rinkNumber, setRinkNumber] = useState(0);
     const [date, setDate] = useState("");
     const [teamNameA, setTeamNameA] = useState("");
-    const [NumberOfPlayers, setNumberOfPlayers] = useState("");
+    const [NumberOfPlayers, setNumberOfPlayers] = useState(0);
     const [teamNameB, setTeamNameB] = useState("");
     var compLengthValid = false;
 
     const onSubmit = () => {
-        if (competitonName.trim().length < 1) {
-            Alert.alert('Alert', 'Must enter competition name');
+        if (competitonName.trim().length < 1 || parseInt(rinkNumber) < 1 || parseInt(rinkNumber) > 999 || teamNameA.trim().length < 1 ||
+        parseInt(NumberOfPlayers) < 1 || parseInt(NumberOfPlayers) > 4 || teamNameB.trim().length < 1 || rinkNumber.toString().trim().length < 1 
+        || NumberOfPlayers.toString().trim().length < 1) {
+            Alert.alert('Alert', 'All fields must be filled. Hint: Rink Number cannot be greater than 999, Number of players '
+            + 'must be between 1 and 4. ');
             return;
         } else {
            compLengthValid = true; 
@@ -32,6 +35,7 @@ const GameDetails = ({navigation}) => {
             <TextInput style={styles.textInput} 
             placeholder="Type competition name here"
             value={competitonName}
+            autoCorrect={false}
             onChangeText={(text) => {setcompetitionName(text);}}
             multiline={false}
             numberOfLines={1}
@@ -53,6 +57,7 @@ const GameDetails = ({navigation}) => {
             <TextInput style={styles.textInput} 
             placeholder="Type team name A here"
             value={teamNameA}
+            autoCorrect={false}
             onChangeText={(text) => {setTeamNameA(text);}}
             multiline={false}
             numberOfLines={1}
@@ -63,6 +68,7 @@ const GameDetails = ({navigation}) => {
             <TextInput style={styles.textInput} 
             placeholder="Type team name B here"
             value={teamNameB}
+            autoCorrect={false}
             onChangeText={(text) => {setTeamNameB(text);}}
             multiline={false}
             numberOfLines={1}
@@ -90,26 +96,6 @@ const GameDetails = ({navigation}) => {
         }}
         />
         
-        <FlatList
-            data={GameDetailsState}
-            keyExtractor={(e) => e.id.toString()}
-            renderItem={({item}) => {
-                return (
-                    
-                    <Pressable onPress={() => navigation.navigate('ViewGamesScreen',{
-                        id: item.id,
-                        competitonName: item.competitonName,
-                        date: item.date,
-                        rinkNumber: item.rinkNumber,
-                        teamNameA: item.teamNameA,
-                        NumberOfPlayers: item.NumberOfPlayers,
-                        teamNameB: item.teamNameB,
-                    })}>
-                    <><Text>{item.id}</Text></>
-                    </Pressable>
-                )
-            }}
-        />
     </View>
   );
 }

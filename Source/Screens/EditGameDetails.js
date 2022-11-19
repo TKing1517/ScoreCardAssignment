@@ -18,9 +18,12 @@ const EditGameDetails = ({navigation,route}) => {
     
 
     const onSubmit = () => {
-        if (teamAtotal < 1 || teamBtotal < 1 || competitonName.trim().length < 1 || rinkNumber.trim().length < 1
-        || teamNameA.trim().length < 1 || teamNameB.trim().length < 1 || NumberOfPlayers.trim().length < 1) {
-            Alert.alert('Alert', 'Field(s) cannnot be blank');
+
+        if (parseInt(teamAtotal) < 1 || parseInt(teamBtotal) < 1 || competitonName.toString().trim().length < 1 || rinkNumber.toString().trim().length < 1
+        || teamNameA.trim().length < 1 || teamNameB.trim().length < 1 || NumberOfPlayers.toString().trim().length < 1 ||
+        teamAtotal.toString().trim().length < 1 || teamBtotal.toString().trim().length < 1 || parseInt(NumberOfPlayers) < 1 
+        || parseInt(NumberOfPlayers) > 4) {
+            Alert.alert('Alert', 'Field(s) must contain valid input');
             return;
         } else {
             validTotals = true; 
@@ -86,6 +89,7 @@ const EditGameDetails = ({navigation,route}) => {
             <Text style={styles.textLabel}>Input New Team A Total Here:</Text>
             <TextInput style={styles.textInput} 
             placeholder="Type here"
+            keyboardType = 'numeric'
             value={teamAtotal}
             onChangeText={(text) => {setATotal(text);}}
             multiline={false}
@@ -95,6 +99,7 @@ const EditGameDetails = ({navigation,route}) => {
             <Text style={styles.textLabel}>Input New Team B Total Here</Text>
             <TextInput style={styles.textInput} 
             placeholder="Type here"
+            keyboardType = 'numeric'
             value={teamBtotal}
             onChangeText={(text) => {setBTotal(text);}}
             multiline={false}

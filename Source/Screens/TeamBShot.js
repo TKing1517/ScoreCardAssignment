@@ -1,4 +1,4 @@
-import { View,Text,StyleSheet,TextInput,Button,FlatList,Pressable } from 'react-native';
+import { View,Text,StyleSheet,TextInput,Button,FlatList,Pressable,Alert } from 'react-native';
 import { useState, useContext } from "react";
 import NavigationButton from '../Components/NavigationButton';
 import ItemContext from '../Contexts/ItemContext';
@@ -8,7 +8,7 @@ import WhichTeamShot from './WhichTeamShot';
 const TeamBShot = ({navigation}) => {
     const {updateTotalB,ID,counterB,incrementCounterB,incrementEnd,End,GameDetailsState} = useContext(ItemContext);
     var tempScoreArray = []
-
+    var ShotValid = false;
     const [DifferentCounter, setDCounter] = useState(0);
 
 
@@ -20,7 +20,16 @@ const TeamBShot = ({navigation}) => {
    
     const [TeamBShot, setTeamBShot] = useState(0);
     const [localcounter, setCounter] = useState(counterB);
-    incrementCounterB();
+    
+    const onSubmit = () => {
+        if (parseInt(TeamBShot) < 1 || parseInt(TeamBShot) > 4) {
+            Alert.alert('Alert', 'Must enter shot between 1 and 4');
+            return;
+        } else {
+            ShotValid = true; 
+        }
+        
+    }
 
     return (
     <View >
@@ -36,33 +45,35 @@ const TeamBShot = ({navigation}) => {
             maxLength={10}
         />
         <Button title = "input shot" onPress ={() => {
-            if (localcounter === 0 ){
-                let ScoretoStore = (parseInt(TeamBShot) + "B")
-                tempScoreArray.push(ScoretoStore)
-                console.log(tempScoreArray)
-                updateTotalB(ID,parseInt(TeamBShot),tempScoreArray);
-
-                setCounter(1);
-                console.log('yes');
-   
-                console.log(ScoretoStore);
-
-                incrementEnd();
-                navigation.pop();
-            } else {
-                let ScoretoStore = (parseInt(TeamBShot) + "B")
-                tempScoreArray.push(ScoretoStore)  
-                console.log(tempScoreArray)
-                updateTotalB(ID,(parseInt(CurrentEntry.TeamBTotal) + parseInt(TeamBShot)),tempScoreArray) 
-
-                console.log('no'); 
-
-                incrementEnd();
-                navigation.pop();
+            onSubmit()
+            if (ShotValid === true){
+                if (localcounter === 0 ){
+                    incrementCounterB();
+                    let ScoretoStore = (parseInt(TeamBShot) + "B")
+                    tempScoreArray.push(ScoretoStore)
+                    console.log(tempScoreArray)
+                    updateTotalB(ID,parseInt(TeamBShot),tempScoreArray);
+    
+                    setCounter(1);
+                    console.log('yes');
+       
+                    console.log(ScoretoStore);
+    
+                    incrementEnd();
+                    navigation.pop();
+                } else {
+                    let ScoretoStore = (parseInt(TeamBShot) + "B")
+                    tempScoreArray.push(ScoretoStore)  
+                    console.log(tempScoreArray)
+                    updateTotalB(ID,(parseInt(CurrentEntry.TeamBTotal) + parseInt(TeamBShot)),tempScoreArray) 
+    
+                    console.log('no'); 
+    
+                    incrementEnd();
+                    navigation.pop();
+                }
             }
- 
             
-
             }}
         />
         <Text>The current total is {CurrentEntry.TeamBTotal}</Text>

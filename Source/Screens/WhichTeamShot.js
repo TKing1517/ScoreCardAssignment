@@ -1,4 +1,4 @@
-import {  Text, View } from 'react-native';
+import {  Text, View,Button } from 'react-native';
 import { useState, useContext } from "react";
 import NavigationButton from '../Components/NavigationButton';
 import ItemContext from '../Contexts/ItemContext';
@@ -20,9 +20,14 @@ const WhichTeamShot = ({navigation}) => {
     CurrentTotalB = 0;
   }
 
-  if (End > 30 || CurrentTotalA >= 21 || CurrentTotalB >= 21){
+  if (CurrentTotalA >= 21 || CurrentTotalB >= 21 ){
     navigation.navigate('GameEnd');
   }
+
+  const forceEnd =() => {
+    navigation.navigate('GameEnd');
+  }
+
   return (
     <View >
       <Text>The current End is {End}</Text>
@@ -31,6 +36,7 @@ const WhichTeamShot = ({navigation}) => {
       <Text>Please indicate which team shot this end by clicking on the team below</Text>
       <NavigationButton screenName="TeamAShot" navigation={navigation}/>
       <NavigationButton screenName="TeamBShot" navigation={navigation}/>
+      <Button title = "Press here to end game immediately"  onPress ={() => {forceEnd()} }/>
     </View>
   );
   

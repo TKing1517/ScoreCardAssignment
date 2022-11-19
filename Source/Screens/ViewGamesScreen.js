@@ -8,8 +8,21 @@ const ViewGamesScreen = ({navigation, route}) => {
     const{GameDetailsState} = useContext(ItemContext);
     const currentEntry = GameDetailsState.find((e) => e.id===id);
 
+    let tempArrayOfScores = [];
+    let scores;
     console.log(currentEntry.StoredPhotoA);
     console.log(currentEntry.StoredPhotoB);
+
+    currentEntry.Scores.forEach(
+        function(d){
+            if (d.charAt(1) === "A"){
+                scores = "Team A scored: " + d.charAt(0);
+            } else {
+                scores = "Team B scored: " + d.charAt(0);
+            }
+            tempArrayOfScores.push(scores);
+        }
+      )
 
     return(
         <View>
@@ -32,7 +45,7 @@ const ViewGamesScreen = ({navigation, route}) => {
             <Text>PlayerB4Name: {currentEntry.PlayerB4Name} </Text>
             <Text>TeamATotal: {currentEntry.TeamATotal} </Text>
             <Text>TeamBTotal: {currentEntry.TeamBTotal} </Text>
-            <Text>Game Scores: {currentEntry.Scores} </Text>
+            <Text>Game Scores: {tempArrayOfScores + ","} </Text>
 
         </View>
     );

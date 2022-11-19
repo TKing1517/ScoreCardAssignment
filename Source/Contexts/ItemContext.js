@@ -321,7 +321,7 @@ export const ItemProvider = ({children}) => {
         dispatchGD({type: actionTypes.updateGameDetails, payload:{id,competitonName,date,rinkNumber,teamNameA,NumberOfPlayers,teamNameB,
             PlayerA1Name,PlayerA2Name,PlayerA3Name,PlayerA4Name,PlayerB1Name,PlayerB2Name,
             PlayerB3Name,PlayerB4Name,StoredPhotoA,StoredPhotoB,TeamATotal,TeamBTotal,Scores}});
-        dispatchGD({type: actionTypes.save});
+        dispatchGD({type: actionTypes.saveGameDetails});
         if (callback) callback();
     }
 

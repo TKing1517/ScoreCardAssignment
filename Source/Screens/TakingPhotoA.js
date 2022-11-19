@@ -28,7 +28,7 @@ const TakingPhotoA = ({navigation}) => {
         return <Text>Awaiting Permission</Text>
     }
     if (hasPermission === false) {
-        return <Text>Access Denied!</Text>
+        return <Text>Access Denied! Ideally there would be a way to handle this...But if you are seeing this message, I forgot to implement it.</Text>
     } 
     
     return (

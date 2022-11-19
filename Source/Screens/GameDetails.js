@@ -1,4 +1,4 @@
-import { View,Text,StyleSheet,TextInput,Button,FlatList,Pressable} from 'react-native';
+import { Alert,View,Text,StyleSheet,TextInput,Button,FlatList,Pressable} from 'react-native';
 import NavigationButton from '../Components/NavigationButton';
 import { useState, useContext } from "react";
 
@@ -13,6 +13,19 @@ const GameDetails = ({navigation}) => {
     const [teamNameA, setTeamNameA] = useState("");
     const [NumberOfPlayers, setNumberOfPlayers] = useState("");
     const [teamNameB, setTeamNameB] = useState("");
+    var compLengthValid = false;
+
+    const onSubmit = () => {
+        if (competitonName.trim().length < 1) {
+            Alert.alert('Alert', 'Must enter competition name');
+            return;
+        } else {
+           compLengthValid = true; 
+        }
+        
+    }
+
+
   return (
     <View >
       <Text style={styles.textLabel}>Competition Name:</Text>
@@ -69,8 +82,12 @@ const GameDetails = ({navigation}) => {
 
          
         <Button title = "submit items" onPress ={() => {
-               create(competitonName,date,rinkNumber,teamNameA,NumberOfPlayers,teamNameB), navigation.navigate('PlayerNamesA');
-            }}
+            onSubmit()
+            if (compLengthValid === true ){
+                create(competitonName,date,rinkNumber,teamNameA,NumberOfPlayers,teamNameB), navigation.navigate('PlayerNamesA');
+            }
+            
+        }}
         />
         
         <FlatList

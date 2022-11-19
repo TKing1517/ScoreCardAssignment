@@ -1,14 +1,26 @@
 import React from "react";
-import { View,Text,StyleSheet,TextInput,Button,FlatList,Pressable} from 'react-native';
+import { View,Text,StyleSheet,TextInput,Button,FlatList,Pressable,Alert} from 'react-native';
 import { useState, useContext } from "react";
 import ItemContext from "../Contexts/ItemContext";
 
 const EditGameDetails = ({navigation,route}) => {
     const {Id} = route.params;
     const{GameDetailsState,EditResults} = useContext(ItemContext);
+    var validTotals = false;
     const currentEntry = GameDetailsState.find((e) => e.id===Id);
     const [teamAtotal,setATotal] = useState(currentEntry.TeamATotal);
     const [teamBtotal,setBTotal] = useState(currentEntry.TeamBTotal);
+    
+
+    const onSubmit = () => {
+        if (teamAtotal.trim().length < 1 || teamBtotal.trim().length < 1) {
+            Alert.alert('Alert', 'Must enter a total');
+            return;
+        } else {
+            validTotals = true; 
+        }
+        
+    }
 
     return(
         <View>
@@ -32,7 +44,10 @@ const EditGameDetails = ({navigation,route}) => {
             maxLength={30}
             />
             <Button title = "submit item" onPress ={() => {
-               EditResults(currentEntry.id,teamAtotal,teamBtotal),navigation.pop();
+                onSubmit()
+                if (validTotals === true){
+                    EditResults(currentEntry.id,teamAtotal,teamBtotal),navigation.pop();
+                }
             }}
             />
         </View>

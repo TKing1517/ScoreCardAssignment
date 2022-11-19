@@ -314,7 +314,7 @@ export const ItemProvider = ({children}) => {
         let PlayerB3Name = currentEntry.PlayerB3Name
         let PlayerB4Name = currentEntry.PlayerB4Name
         let StoredPhotoA = currentEntry.StoredPhotoA
-        let StoredPhotoB = currentEntry.StoredPhotoA
+        let StoredPhotoB = currentEntry.StoredPhotoB
         let TeamATotal = teamATotal
         let TeamBTotal =teamBTotal
         let Scores = currentEntry.Scores

@@ -32,7 +32,7 @@ const EditGameDetails = ({navigation,route}) => {
     }
 
     return(
-        <View>
+        <View style = {styles.container}>
             <Text style={styles.textLabel}>Competition Name:</Text>
             <TextInput style={styles.textInput} 
             placeholder="Type competition name here"
@@ -121,7 +121,25 @@ const EditGameDetails = ({navigation,route}) => {
 };
 
 const styles = StyleSheet.create({
- 
+    textInput:{ 
+        fontSize:20,
+        padding:10,
+        margin: 2,
+        borderWidth:1,
+        backgroundColor: 'white',
+    },
+
+    textLabel:{
+        fontSize:18,
+        paddingLeft:10,
+        marginTop:2,
+
+    },
+
+    container: {
+        flex: 1,
+        backgroundColor: '#ADD8E6',
+      },
 })
 
 export default EditGameDetails;

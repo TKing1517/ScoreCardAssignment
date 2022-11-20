@@ -7,9 +7,9 @@ const TakenPicB =({navigation}) => {
 
     return(
         <View style = {styles.container}>
-            <Text>Here is the photo for team B.</Text>
+            <Text style={styles.textstyle}>Here is the photo for team B.</Text>
             <Image style={styles.imageStyle} source={{uri:GetPhotoB()}}/>
-            <Text>Press the button to continue</Text>
+            <Text style={styles.textstyle}>Press the button to continue</Text>
             <Button title="Continue" onPress ={() => {navigation.navigate('WhichTeamShot')} }/>
         </View>   
     )
@@ -18,14 +18,30 @@ const TakenPicB =({navigation}) => {
 
 
 const styles = StyleSheet.create({
-    container:{
-        flex:1
-    },
+   container: {
+        flex: 1,
+        backgroundColor: '#ADD8E6',
+        alignItems: 'center',
+
+      },
+      
+      lesserContainer: {
+        alignItems: 'center',
+        justifyContent: 'center'
+      },
+    
+      textstyle: {
+        fontSize: 17,
+        
+      },
+
     imageStyle:{
         maxWidth:1000,
         maxHeight:1000,
+        height: 450,
         aspectRatio:1,
-        resizeMode: 'contain'
+        resizeMode: 'contain',
+
     }
 })
 

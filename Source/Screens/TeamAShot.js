@@ -33,9 +33,9 @@ const TeamAShot = ({navigation}) => {
 
 
     return (
-    <View >
+    <View style = {styles.container}>
       
-        <Text style={styles.textLabel}>Input team A shot:</Text>
+        <Text style={styles.textstylelesser}>Input team A shot:</Text>
             <TextInput style={styles.textInput} 
             placeholder="Type shot here"
             keyboardType = 'numeric'
@@ -79,17 +79,6 @@ const TeamAShot = ({navigation}) => {
 
             }}
         />
-        <Text>The current total is {CurrentEntry.TeamATotal}</Text>
-        <FlatList
-        data={GameDetailsState}
-        keyExtractor={(e) => e.id.toString()}
-            renderItem={({item}) => {
-                return (   
-                    <><Text>{item.id}</Text><Text>{item.TeamATotal}</Text><Text>{item.Scores}</Text></>
-                )
-            }}
-        />
-         
     </View>
   );
 }
@@ -100,14 +89,39 @@ const styles = StyleSheet.create({
         padding:10,
         margin: 5,
         borderWidth:1,
-
+        backgroundColor: 'white',
     },
 
-    textLabel:{
-        fontSize:18,
-        paddingLeft:10,
-        marginTop:10,
-    },
+    container: {
+        flex: 1,
+        backgroundColor: '#ADD8E6',
+        alignItems: 'center',
+    
+      },
+      
+      lesserContainer: {
+        borderWidth: 10,
+        borderColor: 'black',
+        borderRadius: 4,
+        padding: 5,
+        marginVertical: 5
+      },
+    
+      textstyleCap: {
+        fontSize: 24,
+      },
+    
+      textstylelesser: {
+        fontSize: 20,
+      },
+    
+      textstyle: {
+        marginTop:20,
+        marginBottom:5,
+        fontSize: 17,
+        textAlign:'center'
+      },
+    
 })
 
 export default TeamAShot;

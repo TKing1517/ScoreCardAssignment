@@ -6,8 +6,8 @@ const WantPhotoA = ({navigation,route}) => {
 
     
     return(
-        <View>
-            <Text>Do you want to take team Photos?</Text>
+        <View style={styles.container}>
+            <Text style={styles.textstyle}>Do you want to take team photos?</Text>
             <Button title = "Take Team A Photo"  onPress ={() => {navigation.navigate('TakingPhotoA')} }/>
             <Button title = "No photos" onPress={() => {navigation.navigate('WhichTeamShot')}}/>
         </View>
@@ -18,15 +18,28 @@ const WantPhotoA = ({navigation,route}) => {
 };
 
 const styles = StyleSheet.create({
-    container:{
-        flex:1
+    container: {
+      flex: 1,
+      backgroundColor: '#ADD8E6',
+      alignItems: 'center',
+      justifyContent: 'center'
     },
-    imageStyle:{
-        flex:1,
-        alignSelf:"stretch",
-        width: 100, 
-        height: 100
-    }
-})
+    
+    lesserContainer: {
+      borderWidth: 10,
+      borderColor: 'black',
+      borderRadius: 4,
+      padding: 5,
+      marginVertical: 5
+    },
+  
+    textstyle: {
+      fontSize: 15,
+      fontWeight: 'bold',
+  
+    },
+    
+  
+  });
 
 export default WantPhotoA;

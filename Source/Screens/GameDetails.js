@@ -30,7 +30,7 @@ const GameDetails = ({navigation}) => {
 
 
   return (
-    <View >
+    <View style={styles.container}>
       <Text style={styles.textLabel}>Competition Name:</Text>
             <TextInput style={styles.textInput} 
             placeholder="Type competition name here"
@@ -106,14 +106,20 @@ const styles = StyleSheet.create({
         padding:10,
         margin: 5,
         borderWidth:1,
-
+        backgroundColor: 'white',
     },
 
     textLabel:{
         fontSize:18,
         paddingLeft:10,
         marginTop:10,
+
     },
+
+    container: {
+        flex: 1,
+        backgroundColor: '#ADD8E6',
+      },
 })
 
 export default GameDetails;

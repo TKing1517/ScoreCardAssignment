@@ -7,8 +7,8 @@ const GameEnd = ({navigation}) => {
     const {resetValues} = useContext(ItemContext);
     resetValues();
     return(
-        <View>
-            <Text>Game has ended.</Text>
+        <View style = {styles.container}>
+            <Text style = {styles.textstyle}>Game has ended.</Text>
             <Button 
             title={'Create new card?'}
             onPress={() => navigation.navigate('LandingPage')}
@@ -20,7 +20,26 @@ const GameEnd = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
- 
+    container: {
+        flex: 1,
+        backgroundColor: '#ADD8E6',
+        alignItems: 'center',
+        justifyContent: 'center'
+      },
+      
+      lesserContainer: {
+        borderWidth: 10,
+        borderColor: 'black',
+        borderRadius: 4,
+        padding: 5,
+        marginVertical: 5
+      },
+    
+      textstyle: {
+        fontSize: 15,
+        fontWeight: 'bold',
+    
+      },
 })
 
 export default GameEnd;

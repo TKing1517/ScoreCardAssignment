@@ -37,7 +37,7 @@ const TakingPhotoB = ({navigation}) => {
                 <Pressable style={styles.buttonStyle} onPress={() => {
                     getPicture();
                 }}>
-                    <Text style={styles.textStyle}>Take Picture!</Text>
+                    <Text style={styles.textStyle}>Press Here To Take Picture!</Text>
                 </Pressable>
             </Camera>
         </View>
@@ -56,12 +56,11 @@ const styles = StyleSheet.create({
         alignItems: "flex-end"
     },
     buttonStyle:{
-        flex:0.1,
         alignItems:"center",
     },
     textStyle:{
-        fontSize:15,
-        marginBottom: 15,
+        fontSize:20,
+        marginBottom: 30,
         color: "yellow",
     }
 })

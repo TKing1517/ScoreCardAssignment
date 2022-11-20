@@ -27,35 +27,37 @@ const ViewGamesScreen = ({navigation, route}) => {
     }
     
     return(
-        <View>
-            <Text>ID: {id} </Text>
-            <Text>competitonName: {currentEntry.competitonName} </Text>
-            <Text>date: {currentEntry.date}</Text>
-            <Text>rinkNumber: {currentEntry.rinkNumber} </Text>
-            <Text>NumberOfPlayers: {currentEntry.NumberOfPlayers}</Text>
-            <Text>teamNameA: {currentEntry.teamNameA} </Text>
+        <View style = {styles.container}>
+            <Text style = {styles.textstyle}>ID of game: {id} </Text>
+            <Text style = {styles.textstyle}>Competition name: {currentEntry.competitonName} </Text>
+            <Text style = {styles.textstyle}>Date created: {currentEntry.date}</Text>
+            <Text style = {styles.textstyle}>Rink number: {currentEntry.rinkNumber} </Text>
+            <Text style = {styles.textstyle}>Number of players: {currentEntry.NumberOfPlayers}</Text>
+            <Text style = {styles.textstyle}>Team A name: {currentEntry.teamNameA} </Text>
             {currentEntry.StoredPhotoA != null? <Image style={styles.imageStyle} source={{uri:currentEntry.StoredPhotoA}}/>: <Text>There is no photo.</Text> }
-            <Text>teamNameB: {currentEntry.teamNameB} </Text>
+            <Text style = {styles.textstyle}>Team B name: {currentEntry.teamNameB} </Text>
             {currentEntry.StoredPhotoB != null? <Image style={styles.imageStyle} source={{uri:currentEntry.StoredPhotoB}}/>: <Text>There is no photo.</Text> }
-            <Text>PlayerA1Name: {currentEntry.PlayerA1Name} </Text>
-            {currentEntry.PlayerA2Name != ""? <Text>PlayerA2Name: {currentEntry.PlayerA2Name}</Text>: null }
-            {currentEntry.PlayerA3Name != ""? <Text>PlayerA3Name: {currentEntry.PlayerA3Name}</Text>: null }
-            {currentEntry.PlayerA4Name != ""? <Text>PlayerA4Name: {currentEntry.PlayerA4Name}</Text>: null }
-            <Text>PlayerB1Name: {currentEntry.PlayerB1Name} </Text>
-            {currentEntry.PlayerB2Name != ""? <Text>PlayerB2Name: {currentEntry.PlayerB2Name}</Text>: null }
-            {currentEntry.PlayerB3Name != ""? <Text>PlayerB3Name: {currentEntry.PlayerB3Name}</Text>: null }
-            {currentEntry.PlayerB4Name != ""? <Text>PlayerB4Name: {currentEntry.PlayerB4Name}</Text>: null }
-            <Text>TeamATotal: {currentEntry.TeamATotal} </Text>
-            <Text>TeamBTotal: {currentEntry.TeamBTotal} </Text>
-            <Text>Game Scores: {tempArrayOfScores + ","} </Text>
+            <Text style = {styles.textstyle}>Team A Player 1: {currentEntry.PlayerA1Name} </Text>
+            {currentEntry.PlayerA2Name != ""? <Text style = {styles.textstyle}>Team A Player 2: {currentEntry.PlayerA2Name}</Text>: null }
+            {currentEntry.PlayerA3Name != ""? <Text style = {styles.textstyle}>Team A Player 3: {currentEntry.PlayerA3Name}</Text>: null }
+            {currentEntry.PlayerA4Name != ""? <Text style = {styles.textstyle}>Team A Player 4: {currentEntry.PlayerA4Name}</Text>: null }
+            <Text style = {styles.textstyle}>Team B Player 1: {currentEntry.PlayerB1Name} </Text>
+            {currentEntry.PlayerB2Name != ""? <Text style = {styles.textstyle}>Team B Player 2: {currentEntry.PlayerB2Name}</Text>: null }
+            {currentEntry.PlayerB3Name != ""? <Text style = {styles.textstyle}>Team B Player 3: {currentEntry.PlayerB3Name}</Text>: null }
+            {currentEntry.PlayerB4Name != ""? <Text style = {styles.textstyle}>Team B Player 4: {currentEntry.PlayerB4Name}</Text>: null }
+            <Text style = {styles.textstyle}>Total score of Team A: {currentEntry.TeamATotal} </Text>
+            <Text style = {styles.textstyle}>Total Score of Team B: {currentEntry.TeamBTotal} </Text>
+            <Text style = {styles.textstyle}>Game Scores for each End: {tempArrayOfScores + ","} </Text>
 
         </View>
     );
 };
 const styles = StyleSheet.create({
-    container:{
-        flex:1
-    },
+    container: {
+        flex: 1,
+        backgroundColor: '#ADD8E6',
+      },
+
     imageStyle:{
         maxWidth:1000,
         maxHeight:1000,
@@ -63,7 +65,12 @@ const styles = StyleSheet.create({
         aspectRatio:1, 
 
         //float: 'left',
-    }
+    },
+
+    textstyle: {
+        fontSize: 15,
+        marginBottom:2,
+      },
 })
 
 

@@ -28,7 +28,7 @@ const PlayerNamesA = ({navigation, route}) => {
     }
 
     return(
-        <View>
+        <View style={styles.container}>
             
             <Text style={styles.textLabel}>Player 1 Of Team A</Text>
                 <TextInput style={styles.textInput} 
@@ -77,16 +77,6 @@ const PlayerNamesA = ({navigation, route}) => {
                 }
             }}
             />
-            <NavigationButton screenName="ViewPlayersAScreen" navigation={navigation}/>
-            <FlatList
-            data={GameDetailsState}
-            keyExtractor={(e) => e.id.toString()}
-                renderItem={({item}) => {
-                    return (  
-                        <><Text>{item.id}</Text></>
-                    )
-                }}
-            />
         </View>
     );
 };
@@ -97,14 +87,20 @@ const styles = StyleSheet.create({
         padding:10,
         margin: 5,
         borderWidth:1,
-
+        backgroundColor: 'white',
     },
 
     textLabel:{
         fontSize:18,
         paddingLeft:10,
         marginTop:10,
+
     },
+
+    container: {
+        flex: 1,
+        backgroundColor: '#ADD8E6',
+      },
 })
 
 export default PlayerNamesA;

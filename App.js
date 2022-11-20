@@ -43,17 +43,17 @@ const App = () => {
           <Stack.Screen
             name='PlayerNamesA'
             component = {PlayerNamesA}
-            options = {{title:"Input player names for team A"}}
+            options = {{title:"Input player names for team A",headerBackVisible:false}}
           />
            <Stack.Screen
             name='PlayerNamesB'
             component = {PlayerNamesB}
-            options = {{title:"Input player names for team B"}}
+            options = {{title:"Input player names for team B",headerBackVisible:false}}
           />
           <Stack.Screen
             name='WhichTeamShot'
             component = {WhichTeamShot}
-            options = {{title:"Which team shot this end?"}}
+            options = {{title:"Which team shot this end?",headerBackVisible:false}}
           />
           <Stack.Screen
             name='TeamAShot'
@@ -73,7 +73,7 @@ const App = () => {
           <Stack.Screen
             name='GameEnd'
             component = {GameEnd}
-            options = {{title:"Game End"}}
+            options = {{title:"Game End",headerBackVisible:false}}
           />
           <Stack.Screen
             name='EditGameDetails'
@@ -83,27 +83,27 @@ const App = () => {
           <Stack.Screen
             name='WantPhotoA'
             component = {WantPhotoA}
-            options = {{title:"Take Photos?"}}
+            options = {{title:"Take Photos?",headerBackVisible:false}}
           />
           <Stack.Screen
             name='TakingPhotoA'
             component = {TakingPhotoA}
-            options = {{title:"Taking Photo A"}}
+            options = {{title:"Taking Photo A",headerBackVisible:false}}
           />
           <Stack.Screen
             name='TakenPicA'
             component = {TakenPicA}
-            options = {{title:"Taken Pic A"}}
+            options = {{title:"Taken Pic A",headerBackVisible:false}}
           />
           <Stack.Screen
             name='TakingPhotoB'
             component = {TakingPhotoB}
-            options = {{title:"Taking Photo B"}}
+            options = {{title:"Taking Photo B",headerBackVisible:false}}
           />
           <Stack.Screen
             name='TakenPicB'
             component = {TakenPicB}
-            options = {{title:"Taken Pic B"}}
+            options = {{title:"Taken Pic B",headerBackVisible:false}}
           />
         </Stack.Navigator>
       </NavigationContainer>

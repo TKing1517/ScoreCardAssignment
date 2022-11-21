@@ -22,7 +22,8 @@ const TeamBShot = ({navigation}) => {
     const [localcounter, setCounter] = useState(counterB);
     
     const onSubmit = () => {
-        if (parseInt(TeamBShot) < 1 || parseInt(TeamBShot) > 4 || TeamBShot.toString().trim().length < 1) {
+        if (parseInt(TeamBShot) < 1 || parseInt(TeamBShot) > 4 || TeamBShot.toString().trim().length < 1
+        || TeamBShot.includes(',') || TeamBShot.includes('.') || TeamBShot.includes('-')) {
             Alert.alert('Alert', 'Must enter shot between 1 and 4');
             return;
         } else {

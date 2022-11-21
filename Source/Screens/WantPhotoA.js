@@ -8,8 +8,17 @@ const WantPhotoA = ({navigation,route}) => {
     return(
         <View style={styles.container}>
             <Text style={styles.textstyle}>Do you want to take team photos?</Text>
-            <Button title = "Take Team A Photo"  onPress ={() => {navigation.navigate('TakingPhotoA')} }/>
-            <Button title = "No photos" onPress={() => {navigation.navigate('WhichTeamShot')}}/>
+            <Pressable style={styles.buttonStyle} onPress={() => {
+                navigation.navigate('TakingPhotoA')
+                }}>
+                <Text style={styles.textstyle}>{"Take Team A Photo"}</Text>
+            </Pressable>
+            
+            <Pressable style={styles.buttonStyle} onPress={() => {
+                navigation.navigate('WhichTeamShot')
+                }}>
+                <Text style={styles.textstyle}>{"No photos"}</Text>
+            </Pressable>
         </View>
         
     )
@@ -37,6 +46,17 @@ const styles = StyleSheet.create({
       fontSize: 15,
       fontWeight: 'bold',
   
+    },
+
+    buttonStyle:{
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingVertical: 6,
+      paddingHorizontal: 16,
+      borderRadius: 4,
+      elevation: 3,
+      backgroundColor: '#5693f5',
+      marginBottom:15
     },
     
   

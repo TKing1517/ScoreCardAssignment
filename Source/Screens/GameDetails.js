@@ -18,7 +18,8 @@ const GameDetails = ({navigation}) => {
     const onSubmit = () => {
         if (competitonName.trim().length < 1 || parseInt(rinkNumber) < 1 || parseInt(rinkNumber) > 999 || teamNameA.trim().length < 1 ||
         parseInt(NumberOfPlayers) < 1 || parseInt(NumberOfPlayers) > 4 || teamNameB.trim().length < 1 || rinkNumber.toString().trim().length < 1 
-        || NumberOfPlayers.toString().trim().length < 1) {
+        || NumberOfPlayers.toString().trim().length < 1 || NumberOfPlayers.includes(',') || NumberOfPlayers.includes('.')
+        || NumberOfPlayers.includes('-') || rinkNumber.includes(',') || rinkNumber.includes('.') || rinkNumber.includes('-')) {
             Alert.alert('Alert', 'All fields must be filled. Hint: Rink Number cannot be greater than 999, Number of players '
             + 'must be between 1 and 4. ');
             return;
@@ -86,15 +87,17 @@ const GameDetails = ({navigation}) => {
             maxLength={1}
         />
 
-         
-        <Button title = "submit items" onPress ={() => {
+
+        <Pressable style={styles.buttonStyle} onPress={() => {
             onSubmit()
             if (compLengthValid === true ){
                 create(competitonName,date,rinkNumber,teamNameA,NumberOfPlayers,teamNameB), navigation.navigate('PlayerNamesA');
             }
-            
-        }}
-        />
+        }}>
+            <Text style={styles.textstyle}>{"submit items"}</Text>
+        </Pressable>
+         
+        
         
     </View>
   );
@@ -119,7 +122,24 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#ADD8E6',
-      },
+    },
+
+    textstyle: {
+        fontSize: 15,
+        fontWeight: 'bold',
+
+    },
+
+    buttonStyle:{
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 6,
+        paddingHorizontal: 16,
+        borderRadius: 4,
+        elevation: 3,
+        backgroundColor: '#5693f5',
+        marginBottom:15
+    },
 })
 
 export default GameDetails;

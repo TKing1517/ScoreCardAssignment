@@ -1,4 +1,4 @@
-import {  Text, View,StyleSheet,Button } from 'react-native';
+import {  Text, View,StyleSheet,Button,Pressable } from 'react-native';
 
 import NavigationButton from '../Components/NavigationButton';
 
@@ -7,15 +7,17 @@ const LandingPage = ({navigation}) => {
     <View style={styles.container}>
       <Text style={styles.textstyle}>Welcome to Scorecard Tracker 9000</Text>
       <Text style={styles.textstyle}>Press the below button to begin tracking your score.</Text>
-      <Button 
-        title={'Click here to create a Score Card'}
-        onPress={() => navigation.navigate('GameDetails')}
-      />
+      <Pressable style={styles.buttonStyle} onPress={() => {
+            navigation.navigate('GameDetails')
+        }}>
+            <Text style={styles.textstyle}>{'Click here to create a Score Card'}</Text>
+      </Pressable>
       <Text style={styles.textstyle}>Or</Text>
-      <Button 
-        title={'Click to view previous games'}
-        onPress={() => navigation.navigate('ViewLoadedGames')}
-      />
+      <Pressable style={styles.buttonStyle} onPress={() => {
+            navigation.navigate('ViewLoadedGames')
+        }}>
+            <Text style={styles.textstyle}>{'Click to view previous games'}</Text>
+      </Pressable>
     </View>
   );
 }
@@ -40,6 +42,17 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
 
+  },
+
+  buttonStyle:{
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 6,
+    paddingHorizontal: 16,
+    borderRadius: 4,
+    elevation: 3,
+    backgroundColor: '#5693f5',
+    marginBottom:15
   },
   
 

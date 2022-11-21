@@ -69,14 +69,14 @@ const PlayerNamesB = ({navigation, route}) => {
                                                                 maxLength={20}
                                                                 />: null }
 
-            <Button title = "submit items" onPress ={() => {
+            <Pressable style={styles.buttonStyle} onPress={() => {
                 onSubmit()
                 if (validation === true ){
                     createTeamB(ID,PlayerB1Name,PlayerB2Name,PlayerB3Name,PlayerB4Name),navigation.navigate('WantPhotoA');
                 }
-                
-            }}
-            />
+                }}>
+                <Text style={styles.textstyle}>{"submit items"}</Text>
+            </Pressable>
 
         </View>
     );
@@ -101,7 +101,26 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#ADD8E6',
-      },
+    },
+
+    textstyle: {
+        fontSize: 15,
+        fontWeight: 'bold',
+    
+    },
+    
+    buttonStyle:{
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 6,
+        paddingHorizontal: 16,
+        borderRadius: 4,
+        elevation: 3,
+        backgroundColor: '#5693f5',
+        marginBottom:15
+    },
+
+      
 })
 
 export default PlayerNamesB;

@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     buttonStyle:{
       alignItems: 'center',
       justifyContent: 'center',
-      paddingVertical: 6,
+      paddingVertical: 8,
       paddingHorizontal: 16,
       borderRadius: 4,
       elevation: 3,
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     buttonStyleRed:{
       alignItems: 'center',
       justifyContent: 'center',
-      paddingVertical: 6,
+      paddingVertical: 8,
       paddingHorizontal: 16,
       borderRadius: 4,
       elevation: 3,
